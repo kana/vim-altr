@@ -108,6 +108,13 @@ endfunction
 
 
 " Misc.  "{{{1
+function! s:error(format, ...)  "{{{2
+  throw printf('%s: %s', 'altr', call('printf', a:format, a:000))
+endfunction
+
+
+
+
 let s:rule_prototype = {}  "{{{2
 
 
