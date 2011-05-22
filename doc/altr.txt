@@ -1,0 +1,338 @@
+*altr.txt*	Switch to the missing file without interaction
+
+Version @@VERSION@@
+Script ID: -
+Copyright (C) 2011 Kana Natsuno <http://whileimautomaton.net/>
+License: So-called MIT/X license  {{{
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+}}}
+
+CONTENTS					*altr-contents*
+
+Introduction		|altr-introduction|
+Interface		|altr-interface|
+  Functions		  |altr-functions|
+  Mappings		  |altr-mappings|
+Rules			|altr-rules|
+  Rule Definition	  |altr-rule-definition|
+  Pattern Definition	  |altr-pattern-definition|
+  Inference Algorithm	  |altr-inference-algorithm|
+  Rule Priorities	  |altr-priorities|
+  Rule Examples		  |altr-rule-examples|
+  Default Rules		  |altr-default-rules|
+Examples		|altr-examples|
+Bugs			|altr-bugs|
+Changelog		|altr-changelog|
+
+
+
+
+==============================================================================
+INTRODUCTION					*altr-introduction*
+
+*altr* is a Vim plugin to switch files easily.
+
+For example, suppose that you are developing a Vim plugin which is called
+"foo".  You often edit specific files such as "autoload/foo.vim",
+"doc/foo.vim", "plugin/foo.vim", etc.  Sometimes one of the files is not
+displayed in any window.  So you have to open the missing file explicitly.
+But there are many ways to open the missing file.  How do you open the missing
+file?  |:edit|, |:buffer|, or your favorite buffer-management plugin?
+
+Whatever you choose, you have to type some keys to specify what the missing
+file is.  So there is no way to open the missing file WITHOUT INTERACTION.
+You'll probably wish if there is a command to open the missing file without
+interaction.  This plugin, altr, provides the command.
+
+The best keys and Ex commands to open the missing file are varied for each
+user.  So that altr doesn't define neither the default keys nor the default Ex
+commands.  See |altr-examples| for details.
+
+
+Requirements:
+- Vim 7.2 or later
+
+Latest version:
+http://github.com/kana/vim-altr
+
+Document in HTML format:
+http://kana.github.com/config/vim/altr.html
+
+
+
+
+==============================================================================
+INTERFACE					*altr-interface*
+
+------------------------------------------------------------------------------
+FUNCTIONS					*altr-functions*
+
+altr#back()					*altr#back()*
+			Open the previous file which is inferred from the
+			current buffer.
+
+altr#define({pat1}, ..., {patN})		*altr#define()*
+			Define rules to infer the missing file from the
+			current buffer.  If rules for {pat1}, ..., or {patN}
+			already exist, those rules are overwritten by the new
+			rules.
+
+			See |altr-rules| for details.
+
+altr#define_defaults()				*altr#define_defaults()*
+			Define the default rules.
+
+altr#forward()					*altr#forward()*
+			Open the next file which is inferred from the current
+			buffer.
+
+altr#remove({pat1}, ..., {patN})		*altr#remove()*
+			Remove rules for {pat1}, ..., and {patN}.
+
+altr#remove_all()				*altr#remove_all()*
+			Remove all rules to infer the missing file.
+
+altr#reset()					*altr#reset()*
+			|altr#remove_all()|, then |altr#define_defaults()|.
+
+altr#show([{pat}])				*altr#show()*
+			Show rules for {pat}, or show all rules is {pat} is
+			omitted.
+
+
+------------------------------------------------------------------------------
+MAPPINGS					*altr-mappings*
+
+The following key mappings are defined in all modes.
+
+<Plug>(altr-back)				*<Plug>(altr-back)*
+			Same as |altr#back()|.
+
+<Plug>(altr-forward)				*<Plug>(altr-forward)*
+			Same as |altr#forward()|.
+
+
+
+
+==============================================================================
+RULES						*altr-rules*
+
+------------------------------------------------------------------------------
+RULE DEFINITION					*altr-rule-definition*
+
+A "rule" consists of three "patterns":
+
+- Current pattern which is used to detect the type of the current buffer.
+- Forward pattern which is used to find the missing file on the forward side.
+- Back pattern which is used to find the missing file on the back side.
+
+
+------------------------------------------------------------------------------
+PATTERN DEFINITION				*altr-pattern-definition*
+
+A pattern is a string to express a set of paths (to files).
+In a pattern, some characters have special meaning:
+
+%
+	For current pattern:
+		Matches 0 or more characters.
+	For other patterns:
+		Matches characters which are matched in current pattern.
+
+*
+	For all patterns:
+		Matches 0 or more characters.
+
+Other character
+	For all patterns:
+		Matches the character itself.
+
+
+------------------------------------------------------------------------------
+INFERENCE ALGORITHM				*altr-inference-algorithm*
+
+The missing file is inferred according to the current buffer and existing
+rules with the following algorithm:
+
+1. Match the current buffer name against a current pattern of each rule.
+
+   a. If a matching pattern is found, go to the step 2.
+
+   b. Otherwise, it is an error.
+
+   Note that patterns are matched in the order of priorities of their rules.
+   See also |altr-rule-priorities|.
+
+2. Check the content of the matching (current) pattern.
+
+   a. If the current pattern contains "*", list paths which match to the
+      current pattern, then use a path which is next to the current buffer
+      name as the missing file.
+
+      If there is no path that is next to the current buffer name, go to the
+      step 2.b.
+
+   b. Otherwise, list paths with one of the forward pattern and the back
+      pattern for the current pattern, then use a path which is next to the
+      current buffer name as the missing file.
+
+      If there is no path that is next to the current buffer name, repeat this
+      step with the forward patten of the forward pattern or the back pattern
+      of the back pattern.
+
+
+------------------------------------------------------------------------------
+RULE PRIORITIES					*altr-rule-priorities*
+
+The priority of a rule is a number.  Higher value means higher priority.
+
+The priority of a rule is calculated as follows:
+
+- Count "*" in the current pattern of the rule (= s).
+- Count "%" in the current pattern of the rule (= p).
+- Count other character in the current pattern of the rule (= c).
+
+The priority of the rule is: 1.0 * c + 1.0 * p + 0.1 * s
+
+If two or more rules have the same priority, those rules are sorted by current
+pattern with dictionary order.
+
+For example:
+
+- The priority of pattern "ftplugin/%.vim" is 14.0.
+- The priority of pattern "ftplugin/%/*.vim" is 15.1.
+- The priority of pattern "ftplugin/%_*.vim" is 15.1.
+- Though "ftplugin/%/*.vim" and "ftplugin/%_*.vim" has the same priority,
+  "ftplugin/%/*.vim" is applied first because it is smaller than
+  "ftplugin/%_*.vim" with dictionary order.
+
+
+------------------------------------------------------------------------------
+RULE EXAMPLES					*altr-rule-examples*
+
+CASE 1 ~
+
+Suppose that we have the following configuration:
+>
+	call altr#remove_all()
+	call altr#define('plugin/%.vim', 'doc/%.txt')
+<
+The following rules are defined by the configuration:
+
+	back pattern    | current pattern | forward pattern
+	----------------+-----------------+----------------
+	doc/%.txt       | plugin/%.vim    | doc/%.txt
+	plugin/%.vim    | doc/%.txt       | plugin/%.vim
+
+If the current buffer name is "plugin/foo.vim", both |altr#forward()| and
+|altr#back()| opens "doc/foo.txt".
+
+CASE 2 ~
+
+Suppose that we have another configuration as follows:
+>
+	call altr#remove_all()
+	call altr#define('ftplugin/%.vim',
+	\                'ftplugin/%_*.vim',
+	\                'ftplugin/%/*.vim')
+<
+The following rules are defined by the configuration:
+
+	back pattern     | current pattern  | forward pattern
+	-----------------+------------------+-----------------
+	ftplugin/%/*.vim | ftplugin/%.vim   | ftplugin/%_*.vim
+	ftplugin/%.vim   | ftplugin/%_*.vim | ftplugin/%/*.vim
+	ftplugin/%/*.vim | ftplugin/%/*.vim | ftplugin/%.vim
+
+And suppose that the following files exist:
+
+- ftplugin/foo.vim
+- ftplugin/foo_mine.vim
+- ftplugin/foo_yours.vim
+- ftplugin/foo/bar.vim
+- ftplugin/foo/baz.vim
+
+If the current buffer name is "ftplugin/foo.vim", |altr#forward()| opens files
+in the following order:
+
+1. ftplugin/foo_mine.vim
+2. ftplugin/foo_yours.vim
+3. ftplugin/foo/bar.vim
+4. ftplugin/foo/baz.vim
+5. ftplugin/foo.vim
+
+And |altr#back()| opens files in the following order:
+
+1. ftplugin/foo/baz.vim
+2. ftplugin/foo/bar.vim
+3. ftplugin/foo_yours.vim
+4. ftplugin/foo_mine.vim
+5. ftplugin/foo.vim
+
+
+------------------------------------------------------------------------------
+DEFAULT RULES					*altr-default-rules*
+
+The following rules are defined by default.
+>
+	call altr#define('%.aspx', '%.aspx.cs')
+	FIXME: ...
+<
+
+
+
+
+==============================================================================
+EXAMPLES					*altr-examples*
+
+(A) Use your favorite keys (such as <F2> and <S-F2>) to open the missing file:
+>
+	nmap <F2>  <Plug>(altr-forward)
+	nmap <S-F2>  <Plug>(altr-back)
+<
+
+(B) Use your favorite Ex command (such as :A) to open the missing file:
+>
+	command! A  call altr#forward()
+<
+
+
+
+
+==============================================================================
+BUGS						*altr-bugs*
+
+- Currently there is no known bug.  Please send bug reports and/or feedback
+  via: https://github.com/kana/vim-altr/issues
+
+
+
+
+==============================================================================
+CHANGELOG					*altr-changelog*
+
+0.0.0	2011-05-20T23:39:12+09:00		*altr-changelog-0.0.0*
+	- Initial version.
+
+
+
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:fen:fdl=0:fdm=marker:
