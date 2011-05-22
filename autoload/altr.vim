@@ -103,6 +103,34 @@ endfunction
 
 
 " Misc.  "{{{1
+let s:rule_prototype = {}  "{{{2
+
+
+
+
+function! s:rule_prototype.make(cp, fp, bp)  "{{{2
+  let new_self = {
+  \   'back_pattern': a:bp,
+  \   'current_pattern': a:cp,
+  \   'forward_pattern': a:fp,
+  \ }
+  return extend(new_self, self, 'keep')
+endfunction
+
+
+
+
+function! s:rule_prototype.show()  "{{{2
+  echo printf('%s -> %s -> %s',
+  \           string(self.current_pattern),
+  \           string(self.forward_pattern),
+  \           string(self.back_pattern))
+  \ }
+endfunction
+
+
+
+
 function! altr#_rules()  "{{{2
   return s:rules
 endfunction
