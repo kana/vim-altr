@@ -23,7 +23,7 @@
 " }}}
 " Interface  "{{{1
 function! altr#back()  "{{{2
-  call altr#_switch(bufname('%'), 'back', altr#_rules())
+  call altr#_switch(bufname('%'), 'back', altr#_rule_table())
 endfunction
 
 
@@ -54,7 +54,7 @@ function! altr#define(...)  "{{{2
   let last = _patterns[-1]
   let patterns = [last] + _patterns + [first]
 
-  let rule_table = altr#_rules()
+  let rule_table = altr#_rule_table()
   for i in range(1, len(_patterns))
     let bp = patterns[i - 1]
     let cp = patterns[i]
@@ -90,7 +90,7 @@ endfunction
 
 
 function! altr#forward()  "{{{2
-  call altr#_switch(bufname('%'), 'forward', altr#_rules())
+  call altr#_switch(bufname('%'), 'forward', altr#_rule_table())
 endfunction
 
 
@@ -99,7 +99,7 @@ endfunction
 function! altr#remove(...)  "{{{2
   let keys = type(a:1) == type([]) ? a:1 : a:000
   for k in keys
-    call remove(altr#_rules(), k)
+    call remove(altr#_rule_table(), k)
   endfor
 endfunction
 
@@ -107,7 +107,7 @@ endfunction
 
 
 function! altr#remove_all()  "{{{2
-  call altr#remove(keys(altr#_rules()))
+  call altr#remove(keys(altr#_rule_table()))
 endfunction
 
 
@@ -122,7 +122,7 @@ endfunction
 
 
 function! altr#show(current_pattern)  "{{{2
-  let v = get(altr#_rules(), a:current_pattern, 0)
+  let v = get(altr#_rule_table(), a:current_pattern, 0)
   if v is 0
     echo printf('No such rule: %s', string(a:current_pattern))
   else
@@ -173,16 +173,16 @@ endfunction
 
 
 
-function! altr#_rules()  "{{{2
-  return s:rules
+function! altr#_rule_table()  "{{{2
+  return s:rule_table
 endfunction
 
-let s:rules = {}
+let s:rule_table = {}
 
 
 
 
-function! altr#_switch(basename, direction, rules)  "{{{2
+function! altr#_switch(basename, direction, rule_table)  "{{{2
   throw 'FIXME: Not implemented yet'
 endfunction
 
