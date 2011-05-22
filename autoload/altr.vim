@@ -81,7 +81,8 @@ endfunction
 
 
 function! altr#reset()  "{{{2
-  throw 'FIXME: Not implemented yet'
+  call altr#remove_all()
+  call altr#define_defaults()
 endfunction
 
 
