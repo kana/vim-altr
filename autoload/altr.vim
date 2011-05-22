@@ -37,7 +37,23 @@ endfunction
 
 
 function! altr#define_defaults()  "{{{2
-  throw 'FIXME: Not implemented yet'
+  call altr#define('autoload/%.vim',
+  \                'colors/%.vim',
+  \                'compiler/%.vim',
+  \                'doc/%.txt',
+  \                'ftdetect/%.vim',
+  \                'ftplugin/%.vim',
+  \                'ftplugin/%_*.vim',
+  \                'ftplugin/%/*.vim',
+  \                'indent/%.vim',
+  \                'keymap/%.vim',
+  \                'lang/%.vim',
+  \                'plugin/%.vim',
+  \                'syntax/%.vim')
+  call altr#define('%.c', '%.h')  " FIXME: Refine.
+  call altr#define('%.aspx', '%.aspx.cs')  " FIXME: Refine.
+  call altr#define('%.ascx', '%.ascx.cs')  " FIXME: Refine.
+  " FIXME: Add more useful defaults.
 endfunction
 
 
