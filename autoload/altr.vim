@@ -23,7 +23,7 @@
 " }}}
 " Interface  "{{{1
 function! altr#back()  "{{{2
-  throw 'FIXME: Not implemented yet'
+  call altr#_switch(bufname('%'), 'back', altr#_rules())
 endfunction
 
 
@@ -44,7 +44,7 @@ endfunction
 
 
 function! altr#forward()  "{{{2
-  throw 'FIXME: Not implemented yet'
+  call altr#_switch(bufname('%'), 'forward', altr#_rules())
 endfunction
 
 
@@ -83,6 +83,20 @@ endfunction
 
 
 " Misc.  "{{{1
+function! altr#_rules()  "{{{2
+  throw 'FIXME: Not implemented yet'
+endfunction
+
+
+
+
+function! altr#_switch(basename, direction, rules)  "{{{2
+  throw 'FIXME: Not implemented yet'
+endfunction
+
+
+
+
 " Startup  "{{{2
 
 if !exists('s:loaded')
