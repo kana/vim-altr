@@ -74,7 +74,7 @@ endfunction
 
 
 function! altr#remove_all()  "{{{2
-  throw 'FIXME: Not implemented yet'
+  call altr#remove(keys(altr#_rules()))
 endfunction
 
 
