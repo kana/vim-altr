@@ -101,8 +101,10 @@ endfunction
 
 " Misc.  "{{{1
 function! altr#_rules()  "{{{2
-  throw 'FIXME: Not implemented yet'
+  return s:rules
 endfunction
+
+let s:rules = {}
 
 
 
