@@ -182,6 +182,35 @@ let s:rule_table = {}
 
 
 
+function! altr#_sort_rules(rule_table)  "{{{2
+  " FIXME: Optimize for performance.  Sorted rules are required to infer the
+  " missing file, so that this function is called whenever user invoke
+  " altr#forward() and altr#back().  Though we have to profile before
+  " optimization.
+  return reverse(sort(values(a:rule_table), 'altr#_sort_rules_comparer'))
+endfunction
+
+
+
+
+function! altr#_sort_rules_comparer(left, right)  "{{{2
+  let pd = altr#_priority_from_rule(a:left) - altr#_priority_from_rule(a:right)
+  if pd != 0
+    return pd
+  endif
+
+  if a:left.current_pattern < a:right.current_pattern
+    return -1
+  elseif a:right.current_pattern < a:left.current_pattern
+    return 1
+  else
+    return 0
+  endif
+endfunction
+
+
+
+
 function! altr#_switch(basename, direction, rule_table)  "{{{2
   throw 'FIXME: Not implemented yet'
 endfunction
