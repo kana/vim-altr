@@ -30,7 +30,37 @@ endfunction
 
 
 function! altr#define(...)  "{{{2
-  throw 'FIXME: Not implemented yet'
+  if !(1 <= a:0)
+    call s:error('define: 1 or more arguments are required.')
+  endif
+
+  " p1       -> p1 p1 p1
+  "          b1 |---|
+  "          f1    |---|
+  " p1 p2    -> p2 p1 p2 p1
+  "          b1 |---|
+  "          f1    |---|
+  "          b2    |---|
+  "          f2       |---|
+  " p1 p2 p3 -> p3 p1 p2 p3 p1
+  "          b1 |---|
+  "          f1    |---|
+  "          b2    |---|
+  "          f2       |---|
+  "          b3       |---|
+  "          f3          |---|
+  let _patterns = a:000
+  let first = _patterns[0]
+  let last = _patterns[-1]
+  let patterns = [last] + _patterns + [first]
+
+  let rule_table = altr#_rules()
+  for i in range(1, len(_patterns))
+    let bp = patterns[i - 1]
+    let cp = patterns[i]
+    let fp = patterns[i + 1]
+    let rule_table[cp] = altr#_make_rule(cp, fp, bp)
+  endfor
 endfunction
 
 
