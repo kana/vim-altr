@@ -67,7 +67,10 @@ endfunction
 
 
 function! altr#remove(...)  "{{{2
-  throw 'FIXME: Not implemented yet'
+  let keys = type(a:1) == type([]) ? a:1 : a:000
+  for k in keys
+    call remove(altr#_rules(), k)
+  endfor
 endfunction
 
 
