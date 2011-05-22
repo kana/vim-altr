@@ -91,8 +91,13 @@ endfunction
 
 
 
-function! altr#show(pattern)  "{{{2
-  throw 'FIXME: Not implemented yet'
+function! altr#show(current_pattern)  "{{{2
+  let v = get(altr#_rules(), a:current_pattern, 0)
+  if v is 0
+    echo printf('No such rule: %s', string(a:current_pattern))
+  else
+    call v.show()
+  endif
 endfunction
 
 
