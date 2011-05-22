@@ -173,6 +173,15 @@ endfunction
 
 
 
+function! altr#_match_with_buffer_name(rule, buffer_name)  "{{{2
+  let xs = matchlist(a:buffer_name,
+  \                  altr#_regexp_from_pattern(a:rule.current_pattern))
+  return empty(xs) ? [!!0, ''] : [!0, xs[1]]
+endfunction
+
+
+
+
 function! altr#_regexp_from_pattern(pattern)  "{{{2
   let p = a:pattern
   let p = escape(p, '\\')
