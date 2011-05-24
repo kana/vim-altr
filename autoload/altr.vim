@@ -126,7 +126,7 @@ function! altr#show(current_pattern)  "{{{2
   if v is 0
     echo printf('No such rule: %s', string(a:current_pattern))
   else
-    call v.show()
+    call altr#_show_rule(v)
   endif
 endfunction
 
@@ -145,28 +145,11 @@ endfunction
 
 
 
-let s:rule_prototype = {}  "{{{2
-
-
-
-
-function! s:rule_prototype.make(cp, fp, bp)  "{{{2
-  let new_self = {
+function! altr#_make_rule(cp, fp, bp)  "{{{2
+  return {
   \   'back_pattern': a:bp,
   \   'current_pattern': a:cp,
   \   'forward_pattern': a:fp,
-  \ }
-  return extend(new_self, self, 'keep')
-endfunction
-
-
-
-
-function! s:rule_prototype.show()  "{{{2
-  echo printf('%s -> %s -> %s',
-  \           string(self.current_pattern),
-  \           string(self.forward_pattern),
-  \           string(self.back_pattern))
   \ }
 endfunction
 
@@ -199,6 +182,16 @@ function! altr#_rule_table()  "{{{2
 endfunction
 
 let s:rule_table = {}
+
+
+
+
+function! altr#_show_rule(rule)  "{{{2
+  echo printf('%s -> %s -> %s',
+  \           string(a:rule.current_pattern),
+  \           string(a:rule.forward_pattern),
+  \           string(a:rule.back_pattern))
+endfunction
 
 
 
