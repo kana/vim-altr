@@ -145,6 +145,13 @@ endfunction
 
 
 
+function! altr#_glob_path_from_pattern(pattern, basepart)  "{{{2
+  return substitute(a:pattern, '%', a:basepart, 'g')
+endfunction
+
+
+
+
 function! altr#_infer_the_missing_path(basename, direction, rule_table)  "{{{2
   let rules = altr#_sort_rules(a:rule_table)
   for r in rules
