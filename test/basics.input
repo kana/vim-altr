@@ -43,7 +43,16 @@ endfunction
 
 
 function s:describe__altr_reset()  "{{{1
-  " FIXME
+  It should reset to the default state.
+
+  call altr#remove_all()
+  call altr#define_defaults()
+  let clear_then_define = copy(altr#_rule_table())
+
+  call altr#reset()
+  let reset = copy(altr#_rule_table())
+
+  Should reset ==# clear_then_define
 endfunction
 
 

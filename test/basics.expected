@@ -59,6 +59,8 @@
 ==== altr_remove_all 
 
 ==== altr_reset 
+---- It should reset to the default state. 
+.
 
 ==== altr_show 
 ---- It should show a defined rule well. 
@@ -79,4 +81,4 @@
 **** Result ****
 
 
-50 examples, 0 failures
+51 examples, 0 failures
