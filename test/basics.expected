@@ -27,6 +27,8 @@
 .....
 
 ==== altr rule table
+---- It should contains the default rules at first. 
+.
 
 ==== altr show rule
 ---- It should show a given rule well. 
@@ -73,4 +75,4 @@
 **** Result ****
 
 
-47 examples, 0 failures
+48 examples, 0 failures

@@ -142,7 +142,13 @@ endfunction
 
 
 function s:describe__altr__rule_table()  "{{{1
-  " FIXME
+  It should contains the default rules at first.
+
+  let first = copy(altr#_rule_table())
+  call altr#reset()
+  let reset = copy(altr#_rule_table())
+
+  Should first ==# reset
 endfunction
 
 
