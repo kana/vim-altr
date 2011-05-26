@@ -61,6 +61,10 @@
 ==== altr_reset 
 
 ==== altr_show 
+---- It should show a defined rule well. 
+.
+---- It should show an undefined rule well. 
+.
 
 ==== plugin_definitions 
 ---- It should be loaded. 
@@ -75,4 +79,4 @@
 **** Result ****
 
 
-48 examples, 0 failures
+50 examples, 0 failures

@@ -50,7 +50,19 @@ endfunction
 
 
 function s:describe__altr_show()  "{{{1
-  " FIXME
+  It should show a defined rule well.
+
+  redir => output
+  silent call altr#show('plugin/%.vim')
+  redir END
+  Should output ==# "\n'plugin/%.vim' -> 'syntax/%.vim' -> 'lang/%.vim'"
+
+  It should show an undefined rule well.
+
+  redir => output
+  silent call altr#show('&$!*()&$!')
+  redir END
+  Should output ==# "\nNo such rule: '&$!*()&$!'"
 endfunction
 
 
