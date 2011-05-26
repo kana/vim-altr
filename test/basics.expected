@@ -25,6 +25,8 @@
 ==== altr rule table
 
 ==== altr show rule
+---- It should show a given rule well. 
+.
 
 ==== altr sort rules
 
@@ -61,4 +63,4 @@
 **** Result ****
 
 
-33 examples, 0 failures
+34 examples, 0 failures
