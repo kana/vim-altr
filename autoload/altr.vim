@@ -213,6 +213,16 @@ endfunction
 
 
 
+function! altr#_priority_from_rule(rule)  "{{{2
+  let p = len(substitute(a:rule.current_pattern, '[^%]', '', 'g'))
+  let s = len(substitute(a:rule.current_pattern, '[^*]', '', 'g'))
+  let c = len(a:rule.current_pattern) - p - s
+  return 10 * c + 10 * p + 1 * s
+endfunction
+
+
+
+
 function! altr#_regexp_from_pattern(pattern)  "{{{2
   let p = a:pattern
   let p = escape(p, '\\')
