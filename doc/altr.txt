@@ -209,7 +209,7 @@ The priority of a rule is calculated as follows:
 - Count "%" in the current pattern of the rule (= p).
 - Count other character in the current pattern of the rule (= c).
 
-The priority of the rule is: 1.0 * c + 1.0 * p + 0.1 * s
+The priority of the rule is: 1.0 * c + 0.5 * p + 0.1 * s
 
 If two or more rules have the same priority, those rules are sorted by current
 pattern with dictionary order.

@@ -119,9 +119,9 @@ function s:describe__altr__priority_from_rule()  "{{{1
   It should calculate priority of a given rule properly.
 
   Should altr#_priority_from_rule(altr#_make_rule('foo', '', '')) ==# 30
-  Should altr#_priority_from_rule(altr#_make_rule('%.vim', '', '')) ==# 50
+  Should altr#_priority_from_rule(altr#_make_rule('%.vim', '', '')) ==# 45
   Should altr#_priority_from_rule(altr#_make_rule('*.vim', '', '')) ==# 41
-  Should altr#_priority_from_rule(altr#_make_rule('%%.vim', '', '')) ==# 60
+  Should altr#_priority_from_rule(altr#_make_rule('%%.vim', '', '')) ==# 50
   Should altr#_priority_from_rule(altr#_make_rule('**.vim', '', '')) ==# 42
 endfunction
 
@@ -176,11 +176,13 @@ function s:describe__altr__sort_rules_comparer()  "{{{1
   Should C(R('foo', '', ''), R('foo', '', '')) == 0
   Should C(R('fo*', '', ''), R('foo', '', '')) < 0
   Should C(R('fo*', '', ''), R('fo%', '', '')) < 0
+  Should C(R('fo%', '', ''), R('foo', '', '')) < 0
 
   It should compare rules by priorities then by current patterns.
 
-  Should C(R('fo%', '', ''), R('foo', '', '')) < 0
   Should C(R('bar', '', ''), R('foo', '', '')) < 0
+  Should C(R('ba%', '', ''), R('fo%', '', '')) < 0
+  Should C(R('X', '', ''), R('%%%', '', '')) < 0
 endfunction
 
 
