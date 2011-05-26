@@ -1,0 +1,196 @@
+runtime! plugin/altr.vim
+
+function s:describe__altr_back()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr_define()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr_define_defaults()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr_forward()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr_remove()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr_remove_all()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr_reset()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr_show()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr__glob_path_from_pattern()  "{{{1
+  It should return a given string as-is.
+
+  Should altr#_glob_path_from_pattern('pattern', 'basepart') ==# 'pattern'
+
+  It should replace '%'s with a given basepart.
+
+  Should altr#_glob_path_from_pattern('<<<%>>>', 'base') ==# '<<<base>>>'
+  Should altr#_glob_path_from_pattern('%-%', 'base') ==# 'base-base'
+endfunction
+
+
+
+
+function s:describe__altr__infer_the_missing_path()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr__list_paths()  "{{{1
+  It should list paths properly
+
+  Should altr#_list_paths('autoload/altr.vim', '') ==# 'autoload/altr.vim'
+  Should altr#_list_paths('autoload/%.vim', 'altr') ==# 'autoload/altr.vim'
+endfunction
+
+
+
+
+function s:describe__altr__make_rule()  "{{{1
+  It should make a rule properly
+
+  let r = altr#_make_rule('current', 'forward', 'back')
+  Should r.current_pattern ==# 'current'
+  Should r.forward_pattern ==# 'forward'
+  Should r.back_pattern ==# 'back'
+endfunction
+
+
+
+
+function s:describe__altr__match_with_buffer_name()  "{{{1
+  It should perform matching properly.
+
+  let R = function('altr#_make_rule')
+  let M = function('altr#_match_with_buffer_name')
+
+  Should M(R('%.vim', '', ''), 'altr.vim') ==# [!0, 'altr']
+  Should M(R('%.vim', '', ''), 'plugin/altr.vim') ==# [!0, 'plugin/altr']
+  Should M(R('%.vim', '', ''), 'doc/altr.txt') ==# [!!0, '']
+  Should M(R('*.vim', '', ''), 'altr.vim') ==# [!0, '']
+  Should M(R('Makefile', '', ''), 'Makefile') ==# [!0, '']
+endfunction
+
+
+
+
+function s:describe__altr__regexp_from_pattern()  "{{{1
+  It should make a regular expression properly
+
+  Should altr#_regexp_from_pattern('foo') ==# '\V\^\.\{-}foo\$'
+  Should altr#_regexp_from_pattern('foo/bar') ==# '\V\^\.\{-}foo/bar\$'
+  Should altr#_regexp_from_pattern('foo\bar') ==# '\V\^\.\{-}foo\\bar\$'
+  Should altr#_regexp_from_pattern('%.vim') ==# '\V\^\.\{-}\(\.\*\).vim\$'
+  Should altr#_regexp_from_pattern('*.vim') ==# '\V\^\.\{-}\.\*.vim\$'
+endfunction
+
+
+
+
+function s:describe__altr__rule_table()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr__show_rule()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr__sort_rules()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr__sort_rules_comparer()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__altr__switch()  "{{{1
+  " FIXME
+endfunction
+
+
+
+
+function s:describe__plugin_definitions()  "{{{1
+  It should be loaded.
+
+  Should exists('g:loaded_altr') be true
+
+  It should provide <Plug>(atlr-back)
+
+  Should maparg('<Plug>(altr-back)', 'n') =~# '\Valtr#back()'
+  Should maparg('<Plug>(altr-back)', 'x') =~# '\Valtr#back()'
+  Should maparg('<Plug>(altr-back)', 's') =~# '\Valtr#back()'
+  Should maparg('<Plug>(altr-back)', 'o') =~# '\Valtr#back()'
+  Should maparg('<Plug>(altr-back)', 'i') =~# '\Valtr#back()'
+  Should maparg('<Plug>(altr-back)', 'c') =~# '\Valtr#back()'
+  Should maparg('<Plug>(altr-back)', 'l') ==# ''
+
+  It should provide <Plug>(atlr-forward)
+
+  Should maparg('<Plug>(altr-forward)', 'n') =~# '\Valtr#forward()'
+  Should maparg('<Plug>(altr-forward)', 'x') =~# '\Valtr#forward()'
+  Should maparg('<Plug>(altr-forward)', 's') =~# '\Valtr#forward()'
+  Should maparg('<Plug>(altr-forward)', 'o') =~# '\Valtr#forward()'
+  Should maparg('<Plug>(altr-forward)', 'i') =~# '\Valtr#forward()'
+  Should maparg('<Plug>(altr-forward)', 'c') =~# '\Valtr#forward()'
+  Should maparg('<Plug>(altr-forward)', 'l') ==# ''
+endfunction
+
+
+
+
+" __END__  "{{{1
+" vim: filetype=vim foldmethod=marker

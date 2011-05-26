@@ -1,0 +1,64 @@
+==== altr glob path from pattern
+---- It should return a given string as-is. 
+.
+---- It should replace '%'s with a given basepart. 
+..
+
+==== altr infer the missing path
+
+==== altr list paths
+---- It should list paths properly 
+..
+
+==== altr make rule
+---- It should make a rule properly 
+...
+
+==== altr match with buffer name
+---- It should perform matching properly. 
+.....
+
+==== altr regexp from pattern
+---- It should make a regular expression properly 
+.....
+
+==== altr rule table
+
+==== altr show rule
+
+==== altr sort rules
+
+==== altr sort rules comparer
+
+==== altr switch
+
+==== altr_back 
+
+==== altr_define 
+
+==== altr_define_defaults 
+
+==== altr_forward 
+
+==== altr_remove 
+
+==== altr_remove_all 
+
+==== altr_reset 
+
+==== altr_show 
+
+==== plugin_definitions 
+---- It should be loaded. 
+.
+---- It should provide <Plug>(atlr-back) 
+.......
+---- It should provide <Plug>(atlr-forward) 
+.......
+
+
+
+**** Result ****
+
+
+33 examples, 0 failures
