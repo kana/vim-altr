@@ -35,6 +35,10 @@
 ==== altr sort rules
 
 ==== altr sort rules comparer
+---- It should compare rules by priorities. 
+...
+---- It should compare rules by priorities then by current patterns. 
+..
 
 ==== altr switch
 
@@ -67,4 +71,4 @@
 **** Result ****
 
 
-39 examples, 0 failures
+44 examples, 0 failures

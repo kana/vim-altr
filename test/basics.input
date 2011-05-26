@@ -168,7 +168,19 @@ endfunction
 
 
 function s:describe__altr__sort_rules_comparer()  "{{{1
-  " FIXME
+  let R = function('altr#_make_rule')
+  let C = function('altr#_sort_rules_comparer')
+
+  It should compare rules by priorities.
+
+  Should C(R('foo', '', ''), R('foo', '', '')) == 0
+  Should C(R('fo*', '', ''), R('foo', '', '')) < 0
+  Should C(R('fo*', '', ''), R('fo%', '', '')) < 0
+
+  It should compare rules by priorities then by current patterns.
+
+  Should C(R('fo%', '', ''), R('foo', '', '')) < 0
+  Should C(R('bar', '', ''), R('foo', '', '')) < 0
 endfunction
 
 
