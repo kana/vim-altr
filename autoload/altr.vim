@@ -179,6 +179,13 @@ endfunction
 
 
 
+function! altr#_list_paths(pattern, basepart)  "{{{2
+  return glob(altr#_glob_path_from_pattern(a:pattern, a:basepart))
+endfunction
+
+
+
+
 function! altr#_make_rule(cp, fp, bp)  "{{{2
   return {
   \   'back_pattern': a:bp,
