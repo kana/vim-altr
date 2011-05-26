@@ -8,7 +8,39 @@ endfunction
 
 
 function s:describe__altr_define()  "{{{1
-  " FIXME
+  let R = function('altr#_make_rule')
+
+  It should define a given rule.
+
+  let first = copy(altr#_rule_table())
+  Should has_key(first, 'foo') be false
+  Should has_key(first, 'bar') be false
+  Should has_key(first, 'baz') be false
+  Should has_key(first, 'qux') be false
+
+  call altr#define('foo')
+  let defined1 = copy(altr#_rule_table())
+  Should defined1['foo'] ==# R('foo', 'foo', 'foo')
+
+  call altr#define('foo', 'bar')
+  let defined2 = copy(altr#_rule_table())
+  Should defined2['foo'] ==# R('foo', 'bar', 'bar')
+  Should defined2['bar'] ==# R('bar', 'foo', 'foo')
+
+  call altr#define('foo', 'bar', 'baz')
+  let defined3 = copy(altr#_rule_table())
+  Should defined3['foo'] ==# R('foo', 'bar', 'baz')
+  Should defined3['bar'] ==# R('bar', 'baz', 'foo')
+  Should defined3['baz'] ==# R('baz', 'foo', 'bar')
+
+  call altr#define('foo', 'bar', 'baz', 'qux')
+  let defined4 = copy(altr#_rule_table())
+  Should defined4['foo'] ==# R('foo', 'bar', 'qux')
+  Should defined4['bar'] ==# R('bar', 'baz', 'foo')
+  Should defined4['baz'] ==# R('baz', 'qux', 'bar')
+  Should defined4['qux'] ==# R('qux', 'foo', 'baz')
+
+  call altr#reset()
 endfunction
 
 
