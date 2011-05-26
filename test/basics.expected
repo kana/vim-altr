@@ -33,6 +33,8 @@
 .
 
 ==== altr sort rules
+---- It should return well sorted rules. 
+.
 
 ==== altr sort rules comparer
 ---- It should compare rules by priorities. 
@@ -71,4 +73,4 @@
 **** Result ****
 
 
-46 examples, 0 failures
+47 examples, 0 failures

@@ -161,7 +161,22 @@ endfunction
 
 
 function s:describe__altr__sort_rules()  "{{{1
-  " FIXME
+  It should return well sorted rules.
+
+  let R = function('altr#_make_rule')
+  let rs = [
+  \   R('autoload/%.vim', '', ''),
+  \   R('doc/%.txt', '', ''),
+  \   R('plugin/%.vim', '', ''),
+  \ ]
+  let rt = {
+  \   rs[0].current_pattern: rs[0],
+  \   rs[1].current_pattern: rs[1],
+  \   rs[2].current_pattern: rs[2],
+  \ }
+
+  Should map(altr#_sort_rules(rt), 'v:val.current_pattern')
+  \ ==# ['autoload/%.vim', 'plugin/%.vim', 'doc/%.txt']
 endfunction
 
 
