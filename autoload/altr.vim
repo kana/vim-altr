@@ -225,8 +225,13 @@ endfunction
 
 
 
-function! altr#_switch(basename, direction, rule_table)  "{{{2
-  throw 'FIXME: Not implemented yet'
+function! altr#_switch(...)  "{{{2
+  let path = call('altr#_infer_the_missing_path', a:000)
+  if path is 0
+    echo 'altr: No rule is matched to the current buffer name.'
+  else
+    edit `=path`
+  endif
 endfunction
 
 
