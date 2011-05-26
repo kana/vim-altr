@@ -29,7 +29,18 @@ endfunction
 
 
 function s:describe__altr_remove()  "{{{1
-  " FIXME
+  It should remove a given rule.
+
+  let first = copy(altr#_rule_table())
+
+  Should has_key(first, 'plugin/%.vim') be true
+
+  call altr#remove('plugin/%.vim')
+  let removed = copy(altr#_rule_table())
+
+  Should has_key(removed, 'plugin/%.vim') be false
+
+  call altr#reset()
 endfunction
 
 
