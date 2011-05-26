@@ -57,6 +57,8 @@
 ==== altr_remove 
 
 ==== altr_remove_all 
+---- It should remove all rules. 
+..
 
 ==== altr_reset 
 ---- It should reset to the default state. 
@@ -81,4 +83,4 @@
 **** Result ****
 
 
-51 examples, 0 failures
+53 examples, 0 failures

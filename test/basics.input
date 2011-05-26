@@ -36,7 +36,18 @@ endfunction
 
 
 function s:describe__altr_remove_all()  "{{{1
-  " FIXME
+  It should remove all rules.
+
+  let first = copy(altr#_rule_table())
+
+  Should empty(first) be false
+
+  call altr#remove_all()
+  let removed = copy(altr#_rule_table())
+
+  Should empty(removed) be true
+
+  call altr#reset()
 endfunction
 
 
