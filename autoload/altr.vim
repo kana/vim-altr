@@ -145,6 +145,40 @@ endfunction
 
 
 
+function! altr#_infer_the_missing_path(basename, direction, rule_table)  "{{{2
+  let rules = altr#_sort_rules(a:rule_table)
+  for r in rules
+    let [matchedp, basepart] = altr#_match_with_buffer_name(r, a:basename)
+    if matchedp
+      if r.current_pattern =~# '\V*'
+        call s:error('Not implemented yet')  " FIXME
+      else
+        let forward_p = a:direction ==# 'forward'
+        let cr = r
+
+        while !0
+          let pattern = cr[forward_p ? 'forward_pattern' : 'back_pattern']
+          let paths = altr#_list_paths(pattern, basepart)
+          if !empty(paths)
+            return paths[forward_p ? 0 : -1]
+          endif
+
+          unlet cr
+          let cr = get(a:rule_table, pattern, 0)
+          if cr is 0
+            return 0  " FIXME: Should try rest of rules?
+          endif
+        endwhile
+      endif
+    endif
+  endfor
+
+  return 0
+endfunction
+
+
+
+
 function! altr#_make_rule(cp, fp, bp)  "{{{2
   return {
   \   'back_pattern': a:bp,
