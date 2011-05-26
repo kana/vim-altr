@@ -115,6 +115,19 @@ endfunction
 
 
 
+function s:describe__altr__priority_from_rule()  "{{{1
+  It should calculate priority of a given rule properly.
+
+  Should altr#_priority_from_rule(altr#_make_rule('foo', '', '')) ==# 30
+  Should altr#_priority_from_rule(altr#_make_rule('%.vim', '', '')) ==# 50
+  Should altr#_priority_from_rule(altr#_make_rule('*.vim', '', '')) ==# 41
+  Should altr#_priority_from_rule(altr#_make_rule('%%.vim', '', '')) ==# 60
+  Should altr#_priority_from_rule(altr#_make_rule('**.vim', '', '')) ==# 42
+endfunction
+
+
+
+
 function s:describe__altr__regexp_from_pattern()  "{{{1
   It should make a regular expression properly
 

@@ -18,6 +18,10 @@
 ---- It should perform matching properly. 
 .....
 
+==== altr priority from rule
+---- It should calculate priority of a given rule properly. 
+.....
+
 ==== altr regexp from pattern
 ---- It should make a regular expression properly 
 .....
@@ -63,4 +67,4 @@
 **** Result ****
 
 
-34 examples, 0 failures
+39 examples, 0 failures
