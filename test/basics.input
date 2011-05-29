@@ -153,10 +153,22 @@ endfunction
 
 
 function s:describe__altr__list_paths()  "{{{1
-  It should list paths properly
+  It should list an empty list if there is no maching paths.
 
-  Should altr#_list_paths('autoload/altr.vim', '') ==# 'autoload/altr.vim'
-  Should altr#_list_paths('autoload/%.vim', 'altr') ==# 'autoload/altr.vim'
+  Should altr#_list_paths('autoload/arpeggio.vim', '') ==# []
+
+  It should list a path with "literal" pattern.
+
+  Should altr#_list_paths('autoload/altr.vim', '') ==# ['autoload/altr.vim']
+
+  It should list a path with "%" pattern.
+
+  Should altr#_list_paths('autoload/%.vim', 'altr') ==# ['autoload/altr.vim']
+
+  It should list paths wiwth "*" pattern.
+
+  Should altr#_list_paths('*/%.vim', 'altr')
+  \ ==# ['autoload/altr.vim', 'plugin/altr.vim']
 endfunction
 
 

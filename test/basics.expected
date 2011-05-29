@@ -7,8 +7,14 @@
 ==== altr infer the missing path
 
 ==== altr list paths
----- It should list paths properly 
-..
+---- It should list an empty list if there is no maching paths. 
+.
+---- It should list a path with "literal" pattern. 
+.
+---- It should list a path with "%" pattern. 
+.
+---- It should list paths wiwth "*" pattern. 
+.
 
 ==== altr make rule
 ---- It should make a rule properly 
@@ -87,4 +93,4 @@
 **** Result ****
 
 
-69 examples, 0 failures
+71 examples, 0 failures
