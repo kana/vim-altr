@@ -47,7 +47,7 @@ endfunction
 
 
 function s:describe__altr_define_defaults()  "{{{1
-  " FIXME
+  " FIXME: How should it be tested?
 endfunction
 
 
