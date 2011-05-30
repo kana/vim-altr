@@ -173,7 +173,8 @@ function! altr#_infer_the_missing_path(basename, direction, rule_table)  "{{{2
           unlet cr
           let cr = get(a:rule_table, pattern, 0)
           if cr is 0
-            return 0  " FIXME: Should try rest of rules?
+            call s:error('Rule for %s is not defined.  Something is wrong.',
+            \            string(pattern))
           endif
         endwhile
       endif
