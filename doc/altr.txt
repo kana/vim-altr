@@ -197,6 +197,9 @@ rules with the following algorithm:
       step with the forward patten of the forward pattern or the back pattern
       of the back pattern.
 
+      If a proper path is not found in these steps, use the "next" rule which
+      has less priority than the current rule.
+
 
 ------------------------------------------------------------------------------
 RULE PRIORITIES					*altr-rule-priorities*

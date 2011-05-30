@@ -176,6 +176,9 @@ function! altr#_infer_the_missing_path(basename, direction, rule_table)  "{{{2
             call s:error('Rule for %s is not defined.  Something is wrong.',
             \            string(pattern))
           endif
+          if cr ==# r
+            break
+          endif
         endwhile
       endif
     endif
