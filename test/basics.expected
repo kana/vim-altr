@@ -73,6 +73,8 @@
 ==== altr_define_defaults 
 
 ==== altr_forward 
+---- It should switch to the missing path forward. 
+....
 
 ==== altr_remove 
 ---- It should remove a given rule. 
@@ -105,4 +107,4 @@
 **** Result ****
 
 
-88 examples, 0 failures
+92 examples, 0 failures

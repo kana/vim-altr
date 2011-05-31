@@ -58,7 +58,27 @@ endfunction
 
 
 function s:describe__altr_forward()  "{{{1
-  " FIXME
+  " Set up
+  call altr#remove_all()
+  call altr#define('autoload/%.vim', 'NONE/%.vim', 'doc/%.txt', 'plugin/%.vim')
+
+  It should switch to the missing path forward.
+
+  silent view autoload/altr.vim
+  Should bufname('%') ==# 'autoload/altr.vim'
+
+  silent! call altr#forward()
+  Should bufname('%') ==# 'doc/altr.txt'
+
+  silent! call altr#forward()
+  Should bufname('%') ==# 'plugin/altr.vim'
+
+  silent! call altr#forward()
+  Should bufname('%') ==# 'autoload/altr.vim'
+
+  " Tear down
+  enew!
+  call altr#reset()
 endfunction
 
 
