@@ -191,12 +191,18 @@ function s:describe__altr__match_with_buffer_name()  "{{{1
 
   let R = function('altr#_make_rule')
   let M = function('altr#_match_with_buffer_name')
+  let padding = repeat([''], 8)
 
-  Should M(R('%.vim', '', ''), 'altr.vim') ==# [!0, 'altr']
-  Should M(R('%.vim', '', ''), 'plugin/altr.vim') ==# [!0, 'plugin/altr']
-  Should M(R('%.vim', '', ''), 'doc/altr.txt') ==# [!!0, '']
-  Should M(R('*.vim', '', ''), 'altr.vim') ==# [!0, '']
-  Should M(R('Makefile', '', ''), 'Makefile') ==# [!0, '']
+  Should M(R('%.vim', '', ''), 'altr.vim')
+  \      ==# [!0, ['altr.vim', 'altr'] + padding]
+  Should M(R('%.vim', '', ''), 'plugin/altr.vim')
+  \      ==# [!0, ['plugin/altr.vim', 'plugin/altr'] + padding]
+  Should M(R('%.vim', '', ''), 'doc/altr.txt')
+  \      ==# [!!0, []]
+  Should M(R('*.vim', '', ''), 'altr.vim')
+  \      ==# [!0, ['altr.vim', ''] + padding]
+  Should M(R('Makefile', '', ''), 'Makefile')
+  \      ==# [!0, ['Makefile', ''] + padding]
 endfunction
 
 

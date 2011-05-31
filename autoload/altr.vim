@@ -155,7 +155,7 @@ endfunction
 function! altr#_infer_the_missing_path(basename, direction, rule_table)  "{{{2
   let rules = altr#_sort_rules(a:rule_table)
   for r in rules
-    let [matchedp, basepart] = altr#_match_with_buffer_name(r, a:basename)
+    let [matchedp, matched_parts] = altr#_match_with_buffer_name(r, a:basename)
     if matchedp
       if r.current_pattern =~# '\V*'
         call s:error('Not implemented yet')  " FIXME
@@ -165,7 +165,7 @@ function! altr#_infer_the_missing_path(basename, direction, rule_table)  "{{{2
 
         while !0
           let pattern = cr[forward_p ? 'forward_pattern' : 'back_pattern']
-          let paths = altr#_list_paths(pattern, basepart)
+          let paths = altr#_list_paths(pattern, matched_parts[1])
           if !empty(paths)
             return paths[forward_p ? 0 : -1]
           endif
@@ -211,7 +211,7 @@ endfunction
 function! altr#_match_with_buffer_name(rule, buffer_name)  "{{{2
   let xs = matchlist(a:buffer_name,
   \                  altr#_regexp_from_pattern(a:rule.current_pattern))
-  return empty(xs) ? [!!0, ''] : [!0, xs[1]]
+  return [!empty(xs), xs]
 endfunction
 
 
