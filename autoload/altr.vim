@@ -79,7 +79,8 @@ function! altr#define_defaults()  "{{{2
   \                'keymap/%.vim',
   \                'lang/%.vim',
   \                'plugin/%.vim',
-  \                'syntax/%.vim')
+  \                'syntax/%.vim',
+  \                'syntax/*/%.vim')
   call altr#define('%.c', '%.h')  " FIXME: Refine.
   call altr#define('%.aspx', '%.aspx.cs')  " FIXME: Refine.
   call altr#define('%.ascx', '%.ascx.cs')  " FIXME: Refine.
