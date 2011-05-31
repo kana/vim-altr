@@ -3,6 +3,16 @@
 ....
 
 ==== altr infer the missing path
+---- It should return 0 if there is no rule to match against basename. (1-b) 
+.
+---- It should return a inferred path with "literal" rules. (1-a, 2-b) 
+.
+---- It should return a inferred path with "%" rules. (1-a, 2-b) 
+.
+---- It should try the "next" of "next" pattern. (1-a, 2-b) 
+.
+---- It should work with an absolute path. (1-a, 2-b) 
+..
 
 ==== altr list paths
 ---- It should list an empty list if there is no maching paths. 
@@ -91,4 +101,4 @@
 **** Result ****
 
 
-74 examples, 0 failures
+80 examples, 0 failures

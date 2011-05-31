@@ -1,5 +1,9 @@
 runtime! plugin/altr.vim
 
+function! NormalizePath(path)
+  return fnamemodify(a:path, ':p:.')
+endfunction
+
 function s:describe__altr_back()  "{{{1
   " FIXME
 endfunction
@@ -150,7 +154,50 @@ endfunction
 
 
 function s:describe__altr__infer_the_missing_path()  "{{{1
-  " FIXME
+  let D = function('NormalizePath')
+  let I = function('altr#_infer_the_missing_path')
+  let T = function('altr#_rule_table')
+
+  It should return 0 if there is no rule to match against basename. (1-b)
+
+  call altr#remove_all()
+  Should I('autoload/altr.vim', 'forward', T()) is 0
+
+  It should return a inferred path with "literal" rules. (1-a, 2-b)
+
+  call altr#remove_all()
+  call altr#define('autoload/altr.vim', 'plugin/altr.vim')
+  Should I('autoload/altr.vim', 'forward', T()) is 'plugin/altr.vim'
+
+  It should return a inferred path with "%" rules. (1-a, 2-b)
+
+  call altr#remove_all()
+  call altr#define('autoload/%.vim', 'plugin/%.vim')
+  Should I('autoload/altr.vim', 'forward', T()) is 'plugin/altr.vim'
+
+  It should try the "next" of "next" pattern. (1-a, 2-b)
+
+  call altr#remove_all()
+  call altr#define('autoload/%.vim', 'NO SUCH DIR/%.vim', 'plugin/%.vim')
+  Should I('autoload/altr.vim', 'forward', T()) is 'plugin/altr.vim'
+
+  It should work with an absolute path. (1-a, 2-b)
+
+  cd ./plugin
+    call altr#remove_all()
+    call altr#define('autoload/%.vim', 'NO SUCH DIR/%.vim', 'plugin/%.vim')
+    let d = D(getcwd()) . '../'
+
+    Should D(I((d . 'autoload/altr.vim'), 'forward', T()))
+    \ is D(d . 'plugin/altr.vim')
+    Should D(I((d . 'plugin/altr.vim'), 'forward', T()))
+    \ is D(d . 'autoload/altr.vim')
+  cd ..
+
+  " FIXME: Add tests about 1-a, 2-a.
+
+  " Tear down
+  call altr#reset()
 endfunction
 
 
