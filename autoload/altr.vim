@@ -237,7 +237,7 @@ function! altr#_regexp_from_pattern(pattern)  "{{{2
   let p = escape(p, '\\')
   let p = substitute(p, '\V*', '\\.\\*', 'g')
   let p = substitute(p, '\V%', '\\(\\.\\*\\)', '')
-  let p = printf('\V\^\.\{-}%s\$', p)
+  let p = printf('\V\^\(\.\{-}\)%s\$', p)
   return p
 endfunction
 

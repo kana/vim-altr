@@ -20,7 +20,7 @@
 
 ==== altr match with buffer name
 ---- It should perform matching properly. 
-.....
+.......
 
 ==== altr priority from rule
 ---- It should calculate priority of a given rule properly. 
@@ -91,4 +91,4 @@
 **** Result ****
 
 
-72 examples, 0 failures
+74 examples, 0 failures

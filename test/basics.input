@@ -199,22 +199,30 @@ endfunction
 
 
 function s:describe__altr__match_with_buffer_name()  "{{{1
-  It should perform matching properly.
-
   let R = function('altr#_make_rule')
   let M = function('altr#_match_with_buffer_name')
-  let padding = repeat([''], 8)
+  let x = {}
+  function! x.m(whole, prefix, basepart)
+    return [a:whole, a:prefix, a:basepart] + repeat([''], 7)
+  endfunction
+
+  It should perform matching properly.
 
   Should M(R('%.vim', '', ''), 'altr.vim')
-  \      ==# [!0, ['altr.vim', 'altr'] + padding]
+  \      ==# [!0, x.m('altr.vim', '', 'altr')]
   Should M(R('%.vim', '', ''), 'plugin/altr.vim')
-  \      ==# [!0, ['plugin/altr.vim', 'plugin/altr'] + padding]
+  \      ==# [!0, x.m('plugin/altr.vim', '', 'plugin/altr')]
   Should M(R('%.vim', '', ''), 'doc/altr.txt')
   \      ==# [!!0, []]
   Should M(R('*.vim', '', ''), 'altr.vim')
-  \      ==# [!0, ['altr.vim', ''] + padding]
+  \      ==# [!0, x.m('altr.vim', '', '')]
   Should M(R('Makefile', '', ''), 'Makefile')
-  \      ==# [!0, ['Makefile', ''] + padding]
+  \      ==# [!0, x.m('Makefile', '', '')]
+
+  Should M(R('plugin/%.vim', '', ''), 'plugin/altr.vim')
+  \      ==# [!0, x.m('plugin/altr.vim', '', 'altr')]
+  Should M(R('plugin/%.vim', '', ''), '~/.vim/plugin/altr.vim')
+  \      ==# [!0, x.m('~/.vim/plugin/altr.vim', '~/.vim/', 'altr')]
 endfunction
 
 
@@ -236,11 +244,11 @@ endfunction
 function s:describe__altr__regexp_from_pattern()  "{{{1
   It should make a regular expression properly
 
-  Should altr#_regexp_from_pattern('foo') ==# '\V\^\.\{-}foo\$'
-  Should altr#_regexp_from_pattern('foo/bar') ==# '\V\^\.\{-}foo/bar\$'
-  Should altr#_regexp_from_pattern('foo\bar') ==# '\V\^\.\{-}foo\\bar\$'
-  Should altr#_regexp_from_pattern('%.vim') ==# '\V\^\.\{-}\(\.\*\).vim\$'
-  Should altr#_regexp_from_pattern('*.vim') ==# '\V\^\.\{-}\.\*.vim\$'
+  Should altr#_regexp_from_pattern('foo') ==# '\V\^\(\.\{-}\)foo\$'
+  Should altr#_regexp_from_pattern('foo/bar') ==# '\V\^\(\.\{-}\)foo/bar\$'
+  Should altr#_regexp_from_pattern('foo\bar') ==# '\V\^\(\.\{-}\)foo\\bar\$'
+  Should altr#_regexp_from_pattern('%.vim') ==# '\V\^\(\.\{-}\)\(\.\*\).vim\$'
+  Should altr#_regexp_from_pattern('*.vim') ==# '\V\^\(\.\{-}\)\.\*.vim\$'
 endfunction
 
 
