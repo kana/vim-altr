@@ -132,14 +132,19 @@ endfunction
 
 
 function s:describe__altr__glob_path_from_pattern()  "{{{1
+  let padding = repeat([''], 8)
+
   It should return a given string as-is.
 
-  Should altr#_glob_path_from_pattern('pattern', 'basepart') ==# 'pattern'
+  Should altr#_glob_path_from_pattern('pattern', ['', 'basepart'] + padding)
+  \      ==# 'pattern'
 
   It should replace '%'s with a given basepart.
 
-  Should altr#_glob_path_from_pattern('<<<%>>>', 'base') ==# '<<<base>>>'
-  Should altr#_glob_path_from_pattern('%-%', 'base') ==# 'base-base'
+  Should altr#_glob_path_from_pattern('<<<%>>>', ['', 'base'])
+  \      ==# '<<<base>>>'
+  Should altr#_glob_path_from_pattern('%-%', ['', 'base'])
+  \      ==# 'base-base'
 endfunction
 
 

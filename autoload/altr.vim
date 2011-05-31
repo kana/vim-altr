@@ -145,8 +145,8 @@ endfunction
 
 
 
-function! altr#_glob_path_from_pattern(pattern, basepart)  "{{{2
-  return substitute(a:pattern, '%', a:basepart, 'g')
+function! altr#_glob_path_from_pattern(pattern, matched_parts)  "{{{2
+  return substitute(a:pattern, '%', a:matched_parts[1], 'g')
 endfunction
 
 
@@ -192,7 +192,7 @@ endfunction
 
 function! altr#_list_paths(pattern, matched_parts)  "{{{2
   return split(
-  \   glob(altr#_glob_path_from_pattern(a:pattern, a:matched_parts[1])),
+  \   glob(altr#_glob_path_from_pattern(a:pattern, a:matched_parts)),
   \   "\n"
   \ )
 endfunction
