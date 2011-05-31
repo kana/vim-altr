@@ -59,6 +59,10 @@
 ...
 
 ==== altr switch
+---- It should switch to the missing path forward. 
+....
+---- It should switch to the missing path back. 
+....
 
 ==== altr_back 
 
@@ -101,4 +105,4 @@
 **** Result ****
 
 
-80 examples, 0 failures
+88 examples, 0 failures

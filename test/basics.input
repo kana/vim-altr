@@ -370,7 +370,41 @@ endfunction
 
 
 function s:describe__altr__switch()  "{{{1
-  " FIXME
+  " Set up
+  call altr#remove_all()
+  call altr#define('autoload/%.vim', 'doc/%.txt', 'plugin/%.vim')
+
+  It should switch to the missing path forward.
+
+  enew!
+  Should bufname('%') ==# ''
+
+  silent! call altr#_switch('autoload/altr.vim', 'forward', altr#_rule_table())
+  Should bufname('%') ==# 'doc/altr.txt'
+
+  silent! call altr#_switch('doc/altr.txt', 'forward', altr#_rule_table())
+  Should bufname('%') ==# 'plugin/altr.vim'
+
+  silent! call altr#_switch('plugin/altr.vim', 'forward', altr#_rule_table())
+  Should bufname('%') ==# 'autoload/altr.vim'
+
+  It should switch to the missing path back.
+
+  enew!
+  Should bufname('%') ==# ''
+
+  silent! call altr#_switch('autoload/altr.vim', 'back', altr#_rule_table())
+  Should bufname('%') ==# 'plugin/altr.vim'
+
+  silent! call altr#_switch('plugin/altr.vim', 'back', altr#_rule_table())
+  Should bufname('%') ==# 'doc/altr.txt'
+
+  silent! call altr#_switch('doc/altr.txt', 'back', altr#_rule_table())
+  Should bufname('%') ==# 'autoload/altr.vim'
+
+  " Tear down
+  enew!
+  call altr#reset()
 endfunction
 
 
