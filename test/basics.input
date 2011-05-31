@@ -132,19 +132,18 @@ endfunction
 
 
 function s:describe__altr__glob_path_from_pattern()  "{{{1
-  let padding = repeat([''], 8)
+  let G = function('altr#_glob_path_from_pattern')
+  let x = {}
+  function! x.m(prefix, basepart)
+    return ['*UNUSED*', a:prefix, a:basepart] + repeat(['*UNUSED*'], 7)
+  endfunction
 
-  It should return a given string as-is.
+  It should return proper glob path from given pattern.
 
-  Should altr#_glob_path_from_pattern('pattern', ['', 'basepart'] + padding)
-  \      ==# 'pattern'
-
-  It should replace '%'s with a given basepart.
-
-  Should altr#_glob_path_from_pattern('<<<%>>>', ['', 'base'])
-  \      ==# '<<<base>>>'
-  Should altr#_glob_path_from_pattern('%-%', ['', 'base'])
-  \      ==# 'base-base'
+  Should G('plugin/%.vim', x.m('', 'altr')) ==# 'plugin/altr.vim'
+  Should G('plugin/%.vim', x.m('./', 'altr')) ==# './plugin/altr.vim'
+  Should G('plugin/%.vim', x.m('~/.vim/', 'altr')) ==# '~/.vim/plugin/altr.vim'
+  Should G('Makefile', x.m('~/.vim/', 'altr')) ==# '~/.vim/Makefile'
 endfunction
 
 
@@ -158,26 +157,30 @@ endfunction
 
 
 function s:describe__altr__list_paths()  "{{{1
-  let padding = repeat([''], 8)
+  let L = function('altr#_list_paths')
+  let x = {}
+  function! x.m(prefix, basepart)
+    return ['*UNUSED*', a:prefix, a:basepart] + repeat(['*UNUSED*'], 7)
+  endfunction
 
   It should list an empty list if there is no maching paths.
 
-  Should altr#_list_paths('autoload/arpeggio.vim', ['', ''] + padding) ==# []
+  Should L('autoload/arpeggio.vim', x.m('./', 'altr')) ==# []
 
   It should list a path with "literal" pattern.
 
-  Should altr#_list_paths('autoload/altr.vim', ['', ''] + padding)
-  \      ==# ['autoload/altr.vim']
+  Should L('autoload/altr.vim', x.m('./', 'altr'))
+  \      ==# ['./autoload/altr.vim']
 
   It should list a path with "%" pattern.
 
-  Should altr#_list_paths('autoload/%.vim', ['', 'altr'] + padding)
-  \      ==# ['autoload/altr.vim']
+  Should L('autoload/%.vim', x.m('./', 'altr'))
+  \      ==# ['./autoload/altr.vim']
 
   It should list paths wiwth "*" pattern.
 
-  Should altr#_list_paths('*/%.vim', ['', 'altr'] + padding)
-  \ ==# ['autoload/altr.vim', 'plugin/altr.vim']
+  Should L('*/%.vim', x.m('./', 'altr'))
+  \ ==# ['./autoload/altr.vim', './plugin/altr.vim']
 endfunction
 
 

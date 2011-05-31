@@ -1,8 +1,6 @@
 ==== altr glob path from pattern
----- It should return a given string as-is. 
-.
----- It should replace '%'s with a given basepart. 
-..
+---- It should return proper glob path from given pattern. 
+....
 
 ==== altr infer the missing path
 
@@ -93,4 +91,4 @@
 **** Result ****
 
 
-71 examples, 0 failures
+72 examples, 0 failures
