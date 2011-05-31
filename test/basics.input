@@ -414,6 +414,13 @@ function s:describe__altr__switch()  "{{{1
   call altr#remove_all()
   call altr#define('autoload/%.vim', 'doc/%.txt', 'plugin/%.vim')
 
+  It should show error message if there is no matching rule.
+
+  redir => m
+  silent! call altr#_switch('NO SUCH PATH', 'forward', altr#_rule_table())
+  redir END
+  Should m =~# '\V\<altr: No rule is matched to the current buffer name.'
+
   It should switch to the missing path forward.
 
   enew!

@@ -59,6 +59,8 @@
 ...
 
 ==== altr switch
+---- It should show error message if there is no matching rule. 
+.
 ---- It should switch to the missing path forward. 
 ....
 ---- It should switch to the missing path back. 
@@ -109,4 +111,4 @@
 **** Result ****
 
 
-96 examples, 0 failures
+97 examples, 0 failures
