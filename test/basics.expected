@@ -65,6 +65,8 @@
 ....
 
 ==== altr_back 
+---- It should switch to the missing path forward. 
+....
 
 ==== altr_define 
 ---- It should define a given rule. 
@@ -107,4 +109,4 @@
 **** Result ****
 
 
-92 examples, 0 failures
+96 examples, 0 failures
