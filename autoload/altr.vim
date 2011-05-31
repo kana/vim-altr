@@ -165,7 +165,7 @@ function! altr#_infer_the_missing_path(basename, direction, rule_table)  "{{{2
 
         while !0
           let pattern = cr[forward_p ? 'forward_pattern' : 'back_pattern']
-          let paths = altr#_list_paths(pattern, matched_parts[1])
+          let paths = altr#_list_paths(pattern, matched_parts)
           if !empty(paths)
             return paths[forward_p ? 0 : -1]
           endif
@@ -190,8 +190,11 @@ endfunction
 
 
 
-function! altr#_list_paths(pattern, basepart)  "{{{2
-  return split(glob(altr#_glob_path_from_pattern(a:pattern, a:basepart)), "\n")
+function! altr#_list_paths(pattern, matched_parts)  "{{{2
+  return split(
+  \   glob(altr#_glob_path_from_pattern(a:pattern, a:matched_parts[1])),
+  \   "\n"
+  \ )
 endfunction
 
 
