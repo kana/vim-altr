@@ -67,20 +67,24 @@ endfunction
 
 
 function! altr#define_defaults()  "{{{2
-  call altr#define('autoload/%.vim',
-  \                'colors/%.vim',
-  \                'compiler/%.vim',
-  \                'doc/%.txt',
-  \                'ftdetect/%.vim',
-  \                'ftplugin/%.vim',
-  \                'ftplugin/%_*.vim',
-  \                'ftplugin/%/*.vim',
-  \                'indent/%.vim',
-  \                'keymap/%.vim',
-  \                'lang/%.vim',
-  \                'plugin/%.vim',
-  \                'syntax/%.vim',
-  \                'syntax/*/%.vim')
+  let vim_runtime_files = [
+  \   'autoload/%.vim',
+  \   'colors/%.vim',
+  \   'compiler/%.vim',
+  \   'doc/%.txt',
+  \   'ftdetect/%.vim',
+  \   'ftplugin/%.vim',
+  \   'ftplugin/%_*.vim',
+  \   'ftplugin/%/*.vim',
+  \   'indent/%.vim',
+  \   'keymap/%.vim',
+  \   'lang/%.vim',
+  \   'plugin/%.vim',
+  \   'syntax/%.vim',
+  \   'syntax/*/%.vim',
+  \ ]
+  let vim_after_runtime_files = map(copy(vim_runtime_files), '"after/".v:val')
+  call altr#define(vim_after_runtime_files + vim_runtime_files)
 
   call altr#define('%.c', '%.h')  " FIXME: Refine.
 
