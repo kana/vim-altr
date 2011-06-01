@@ -29,17 +29,17 @@ endif
 
 
 
-cnoremap <Plug>(altr-back)  <C-c>:call altr#back()<Return>
-inoremap <Plug>(altr-back)  <Esc>:call altr#back()<Return>
-nnoremap <Plug>(altr-back)  :<C-u>call altr#back()<Return>
-onoremap <Plug>(altr-back)  <Esc>:call altr#back()<Return>
-vnoremap <Plug>(altr-back)  <Esc>:call altr#back()<Return>
+cnoremap <silent> <Plug>(altr-back)  <C-c>:call altr#back()<Return>
+inoremap <silent> <Plug>(altr-back)  <Esc>:call altr#back()<Return>
+nnoremap <silent> <Plug>(altr-back)  :<C-u>call altr#back()<Return>
+onoremap <silent> <Plug>(altr-back)  <Esc>:call altr#back()<Return>
+vnoremap <silent> <Plug>(altr-back)  <Esc>:call altr#back()<Return>
 
-cnoremap <Plug>(altr-forward)  <C-c>:call altr#forward()<Return>
-inoremap <Plug>(altr-forward)  <Esc>:call altr#forward()<Return>
-nnoremap <Plug>(altr-forward)  :<C-u>call altr#forward()<Return>
-onoremap <Plug>(altr-forward)  <Esc>:call altr#forward()<Return>
-vnoremap <Plug>(altr-forward)  <Esc>:call altr#forward()<Return>
+cnoremap <silent> <Plug>(altr-forward)  <C-c>:call altr#forward()<Return>
+inoremap <silent> <Plug>(altr-forward)  <Esc>:call altr#forward()<Return>
+nnoremap <silent> <Plug>(altr-forward)  :<C-u>call altr#forward()<Return>
+onoremap <silent> <Plug>(altr-forward)  <Esc>:call altr#forward()<Return>
+vnoremap <silent> <Plug>(altr-forward)  <Esc>:call altr#forward()<Return>
 
 
 
