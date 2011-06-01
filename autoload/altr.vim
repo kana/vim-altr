@@ -158,7 +158,7 @@ endfunction
 
 function! altr#_glob_path_from_pattern(pattern, matched_parts)  "{{{2
   let prefix = a:matched_parts[1]
-  let basepart = a:matched_parts[2]
+  let basepart = altr#_escape_replacement(a:matched_parts[2])
   return prefix . substitute(a:pattern, '%', basepart, 'g')
 endfunction
 
