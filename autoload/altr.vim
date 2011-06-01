@@ -49,7 +49,7 @@ function! altr#define(...)  "{{{2
   "          f2       |---|
   "          b3       |---|
   "          f3          |---|
-  let _patterns = a:000
+  let _patterns = type(a:1) == type([]) ? a:1 : a:000
   let first = _patterns[0]
   let last = _patterns[-1]
   let patterns = [last] + _patterns + [first]

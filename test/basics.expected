@@ -79,6 +79,8 @@
 ==== altr_define 
 ---- It should define a given rule. 
 ..............
+---- It should define a given rule which is passed as a list of patterns. 
+...
 
 ==== altr_define_defaults 
 
@@ -117,4 +119,4 @@
 **** Result ****
 
 
-109 examples, 0 failures
+112 examples, 0 failures

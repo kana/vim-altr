@@ -89,6 +89,7 @@ altr#back()					*altr#back()*
 			current buffer.
 
 altr#define({pat1}, ..., {patN})		*altr#define()*
+altr#define({list-of-pats})
 			Define rules to infer the missing file from the
 			current buffer.  If rules for {pat1}, ..., or {patN}
 			already exist, those rules are overwritten by the new

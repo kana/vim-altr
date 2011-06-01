@@ -64,6 +64,14 @@ function s:describe__altr_define()  "{{{1
   Should defined4['baz'] ==# R('baz', 'qux', 'bar')
   Should defined4['qux'] ==# R('qux', 'foo', 'baz')
 
+  It should define a given rule which is passed as a list of patterns.
+
+  call altr#define(['mon', 'tue', 'wed'])
+  let defined5 = copy(altr#_rule_table())
+  Should defined5['mon'] ==# R('mon', 'tue', 'wed')
+  Should defined5['tue'] ==# R('tue', 'wed', 'mon')
+  Should defined5['wed'] ==# R('wed', 'mon', 'tue')
+
   call altr#reset()
 endfunction
 
