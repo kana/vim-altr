@@ -175,6 +175,25 @@ endfunction
 
 
 
+function s:describe__altr__escape_replacement()  "{{{1
+  let S = function('substitute')
+  let E = function('altr#_escape_replacement')
+
+  It should escape special characters for replacement string for substitute().
+
+  Should E('A-Z a-z 0-9 ...') ==# 'A-Z a-z 0-9 ...'
+  Should E('A-Z&a-z\0-9 ...') ==# 'A-Z\&a-z\\0-9 ...'
+  Should S('foobar', 'oo..', '<&>', '') ==# 'f<ooba>r'
+  Should S('foobar', 'oo..', E('<&>'), '') ==# 'f<&>r'
+  Should S('foobar', 'oo..', '<\0>', '') ==# 'f<ooba>r'
+  Should S('foobar', 'oo..', E('<\0>'), '') ==# 'f<\0>r'
+  Should S('foobar', 'oo..', '<~>', '') ==# 'f<~>r'
+  Should S('foobar', 'oo..', '<\~>', '') ==# 'f<~>r'
+endfunction
+
+
+
+
 function s:describe__altr__glob_path_from_pattern()  "{{{1
   let G = function('altr#_glob_path_from_pattern')
   let x = {}

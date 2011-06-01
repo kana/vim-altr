@@ -1,3 +1,7 @@
+==== altr escape replacement
+---- It should escape special characters for replacement string for substitute(). 
+........
+
 ==== altr glob path from pattern
 ---- It should return proper glob path from given pattern. 
 ....
@@ -111,4 +115,4 @@
 **** Result ****
 
 
-97 examples, 0 failures
+105 examples, 0 failures

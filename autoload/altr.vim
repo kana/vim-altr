@@ -146,6 +146,16 @@ endfunction
 
 
 
+function! altr#_escape_replacement(s)  "{{{2
+  " Escape special characters for replacement string for substitute().
+  " According to :help substitute() and :help sub-replace-special,
+  " only \ and & must be escaped.
+  return escape(a:s, '\&')
+endfunction
+
+
+
+
 function! altr#_glob_path_from_pattern(pattern, matched_parts)  "{{{2
   let prefix = a:matched_parts[1]
   let basepart = a:matched_parts[2]
