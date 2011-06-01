@@ -81,9 +81,13 @@ function! altr#define_defaults()  "{{{2
   \                'plugin/%.vim',
   \                'syntax/%.vim',
   \                'syntax/*/%.vim')
+
   call altr#define('%.c', '%.h')  " FIXME: Refine.
-  call altr#define('%.aspx', '%.aspx.cs')  " FIXME: Refine.
-  call altr#define('%.ascx', '%.ascx.cs')  " FIXME: Refine.
+
+  call altr#define('%.asax', '%.asax.cs')
+  call altr#define('%.ascx', '%.ascx.cs', '%.ascx.designer.cs', '%.ascx.resx') 
+  call altr#define('%.aspx', '%.aspx.cs', '%.aspx.designer.cs', '%.aspx.resx') 
+
   " FIXME: Add more useful defaults.
 endfunction
 
