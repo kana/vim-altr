@@ -71,6 +71,8 @@
 ....
 ---- It should switch to the missing path back. 
 ....
+---- It should keep the cursor line if possible. 
+.....
 
 ==== altr_back 
 ---- It should switch to the missing path forward. 
@@ -119,4 +121,4 @@
 **** Result ****
 
 
-112 examples, 0 failures
+117 examples, 0 failures

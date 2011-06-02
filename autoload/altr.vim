@@ -316,7 +316,15 @@ function! altr#_switch(...)  "{{{2
   if path is 0
     echo 'altr: No rule is matched to the current buffer name.'
   else
-    edit `=path`
+    let n = bufnr(path)
+    if n == -1
+      edit `=path`
+    else
+      " NB: Unlike <C-^>, :[N]buffer doesn't restore the last cursor position
+      " of a buffer perfectly.  Only the cursor line is restored.  The cursor
+      " column is always moved to the first column (in a sense of 0).
+      execute n 'buffer'
+    endif
   endif
 endfunction
 

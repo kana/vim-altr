@@ -483,6 +483,21 @@ function s:describe__altr__switch()  "{{{1
   silent! call altr#_switch('doc/altr.txt', 'back', altr#_rule_table())
   Should bufname('%') ==# 'autoload/altr.vim'
 
+  It should keep the cursor line if possible.
+
+  silent! edit autoload/altr.vim
+  normal! L
+  let last_curcor_line = line('.')
+  Should bufname('%') ==# 'autoload/altr.vim'
+  Should last_curcor_line > 1
+
+  silent! call altr#_switch(bufname('%'), 'forward', altr#_rule_table())
+  Should bufname('%') ==# 'doc/altr.txt'
+
+  silent! call altr#_switch(bufname('%'), 'back', altr#_rule_table())
+  Should bufname('%') ==# 'autoload/altr.vim'
+  Should line('.') == last_curcor_line
+
   " Tear down
   enew!
   call altr#reset()
