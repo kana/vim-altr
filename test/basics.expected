@@ -4,9 +4,9 @@
 
 ==== altr glob path from pattern
 ---- It should return proper glob path from given pattern. 
-....
+.....
 ---- It should return proper glob path from pattern with "\"s. 
-....
+.....
 
 ==== altr infer the missing path
 ---- It should return 0 if there is no rule to match against basename. (1-b) 
@@ -123,4 +123,4 @@
 **** Result ****
 
 
-123 examples, 0 failures
+125 examples, 0 failures

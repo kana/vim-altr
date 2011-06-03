@@ -214,6 +214,7 @@ function s:describe__altr__glob_path_from_pattern()  "{{{1
   Should G('plugin/%.vim', x.m('', 'altr')) ==# 'plugin/altr.vim'
   Should G('plugin/%.vim', x.m('./', 'altr')) ==# './plugin/altr.vim'
   Should G('plugin/%.vim', x.m('~/.vim/', 'altr')) ==# '~/.vim/plugin/altr.vim'
+  Should G('*/%.vim', x.m('./', 'altr')) ==# './*/altr.vim'
   Should G('Makefile', x.m('~/.vim/', 'altr')) ==# '~/.vim/Makefile'
 
   It should return proper glob path from pattern with "\"s.
@@ -221,6 +222,7 @@ function s:describe__altr__glob_path_from_pattern()  "{{{1
   Should G('plugin\%.vim', x.m('', 'altr')) ==# 'plugin\altr.vim'
   Should G('plugin\%.vim', x.m('.\', 'altr')) ==# '.\plugin\altr.vim'
   Should G('plugin\%.vim', x.m('~\.vim\', 'altr')) ==# '~\.vim\plugin\altr.vim'
+  Should G('*\%.vim', x.m('.\', 'altr')) ==# '.\*\altr.vim'
   Should G('Makefile', x.m('~\.vim\', 'altr')) ==# '~\.vim\Makefile'
 endfunction
 
