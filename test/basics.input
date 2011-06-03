@@ -177,7 +177,7 @@ function s:describe__altr_show()  "{{{1
   redir => output
   silent call altr#show('&$!*()&$!')
   redir END
-  Should output ==# "\nNo such rule: '&$!*()&$!'"
+  Should output ==# "\naltr: No such rule: '&$!*()&$!'"
 endfunction
 
 

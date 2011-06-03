@@ -133,7 +133,7 @@ endfunction
 function! altr#show(current_pattern)  "{{{2
   let v = get(altr#_rule_table(), a:current_pattern, 0)
   if v is 0
-    echo printf('No such rule: %s', string(a:current_pattern))
+    call s:notice('No such rule: %s', string(a:current_pattern))
   else
     call altr#_show_rule(v)
   endif
@@ -321,7 +321,7 @@ endfunction
 function! altr#_switch(...)  "{{{2
   let path = call('altr#_infer_the_missing_path', a:000)
   if path is 0
-    echo 'altr: No rule is matched to the current buffer name.'
+    call s:notice('No rule is matched to the current buffer name.')
   else
     let n = bufnr(path)
     if n == -1
