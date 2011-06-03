@@ -19,6 +19,8 @@
 .
 ---- It should work with an absolute path. (1-a, 2-b) 
 ..
+---- It should return a inffered path with "*" rules. (1-a, 2-a) 
+......
 
 ==== altr list paths
 ---- It should list an empty list if there is no maching paths. 
@@ -121,4 +123,4 @@
 **** Result ****
 
 
-117 examples, 0 failures
+123 examples, 0 failures

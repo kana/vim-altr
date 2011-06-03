@@ -268,7 +268,18 @@ function s:describe__altr__infer_the_missing_path()  "{{{1
     \ is D(d . 'autoload/altr.vim')
   cd ..
 
-  " FIXME: Add tests about 1-a, 2-a.
+  It should return a inffered path with "*" rules. (1-a, 2-a)
+
+  call altr#remove_all()
+  call altr#define('*/%.vim', 'doc/%.txt')
+
+  Should I('autoload/altr.vim', 'forward', T()) is 'plugin/altr.vim'
+  Should I('plugin/altr.vim', 'forward', T()) is 'doc/altr.txt'
+  Should I('doc/altr.txt', 'forward', T()) is 'autoload/altr.vim'
+
+  Should I('autoload/altr.vim', 'back', T()) is 'doc/altr.txt'
+  Should I('plugin/altr.vim', 'back', T()) is 'autoload/altr.vim'
+  Should I('doc/altr.txt', 'back', T()) is 'plugin/altr.vim'
 
   " Tear down
   call altr#reset()

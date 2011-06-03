@@ -213,7 +213,26 @@ function! altr#_infer_the_missing_path(basename, direction, rule_table)  "{{{2
 endfunction
 
 function! s:infer_step_2_a(basename, direction, rule_table, rule, match)
-  call s:error('Not implemented yet')  " FIXME
+  let paths = altr#_list_paths(a:rule.current_pattern, a:match)
+  let i = index(paths, a:basename)
+  if i == -1
+    call s:warn('Something wrong - %s not found in %s',
+    \           string(a:basename),
+    \           string(a:rule.current_pattern))
+    return 0
+  endif
+
+  if a:direction ==# 'forward' && i + 1 < len(paths)
+    return paths[i + 1]
+  elseif a:direction ==# 'back' && 0 <= i - 1
+    return paths[i - 1]
+  else
+    return s:infer_step_2_b(a:basename,
+    \                       a:direction,
+    \                       a:rule_table,
+    \                       a:rule,
+    \                       a:match)
+  endif
 endfunction
 
 function! s:infer_step_2_b(basename, direction, rule_table, rule, match)
