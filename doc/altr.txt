@@ -294,10 +294,58 @@ And |altr#back()| opens files in the following order:
 ------------------------------------------------------------------------------
 DEFAULT RULES					*altr-default-rules*
 
-The following rules are defined by default.
+The following rules are defined by default.  Please send feedback if you find
+some rule that should be defined default and the rule makes everyone happy.
+
+For Vim script: >
+	autoload/%.vim
+	colors/%.vim
+	compiler/%.vim
+	doc/%.txt
+	ftdetect/%.vim
+	ftplugin/%.vim
+	ftplugin/%_*.vim
+	ftplugin/%/*.vim
+	indent/%.vim
+	keymap/%.vim
+	lang/%.vim
+	plugin/%.vim
+	syntax/%.vim
+	syntax/*/%.vim
+	after/autoload/%.vim
+	after/colors/%.vim
+	after/compiler/%.vim
+	after/doc/%.txt
+	after/ftdetect/%.vim
+	after/ftplugin/%.vim
+	after/ftplugin/%_*.vim
+	after/ftplugin/%/*.vim
+	after/indent/%.vim
+	after/keymap/%.vim
+	after/lang/%.vim
+	after/plugin/%.vim
+	after/syntax/%.vim
+	after/syntax/*/%.vim
 >
-	call altr#define('%.aspx', '%.aspx.cs')
-	FIXME: ...
+
+For C language: >
+	%.c
+	%.h
+<
+
+For ASP.NET: >
+	%.asax
+	%.asax.cs
+
+	%.ascx
+	%.ascx.cs
+	%.ascx.designer.cs
+	%.ascx.resx
+
+	%.aspx
+	%.aspx.cs
+	%.aspx.designer.cs
+	%.aspx.resx
 <
 
 
