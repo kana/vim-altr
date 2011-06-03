@@ -154,6 +154,13 @@ endfunction
 
 
 
+function! s:format(format, ...)  "{{{2
+  return call('printf', ['%s: ' . a:format, 'altr'] + a:000)
+endfunction
+
+
+
+
 function! s:notice(format, ...)  "{{{2
   echo call('printf', ['%s: ' . a:format, 'altr'] + a:000)
 endfunction
