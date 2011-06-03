@@ -154,6 +154,13 @@ endfunction
 
 
 
+function! s:notice(format, ...)  "{{{2
+  echo call('printf', ['%s: ' . a:format, 'altr'] + a:000)
+endfunction
+
+
+
+
 function! altr#_escape_replacement(s)  "{{{2
   " Escape special characters for replacement string for substitute().
   " According to :help substitute() and :help sub-replace-special,
