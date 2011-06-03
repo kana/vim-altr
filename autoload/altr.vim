@@ -168,6 +168,13 @@ endfunction
 
 
 
+function! s:warn(...)  "{{{2
+  echomsg call('s:format', a:000)
+endfunction
+
+
+
+
 function! altr#_escape_replacement(s)  "{{{2
   " Escape special characters for replacement string for substitute().
   " According to :help substitute() and :help sub-replace-special,
