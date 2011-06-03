@@ -148,7 +148,7 @@ endfunction
 
 " Misc.  "{{{1
 function! s:error(format, ...)  "{{{2
-  throw call('printf', ['%s: ' . a:format, 'altr'] + a:000)
+  throw call('s:format', a:000)
 endfunction
 
 
@@ -161,8 +161,8 @@ endfunction
 
 
 
-function! s:notice(format, ...)  "{{{2
-  echo call('printf', ['%s: ' . a:format, 'altr'] + a:000)
+function! s:notice(...)  "{{{2
+  echo call('s:format', a:000)
 endfunction
 
 
