@@ -274,6 +274,14 @@ endfunction
 
 
 function! altr#_list_paths(pattern, matched_parts)  "{{{2
+  " NB: On Windows environments, the proper path separator is '\', but '/' may
+  " be used to list paths.  So that '/'s in a:pattern are left as is.
+  "
+  " Souce: http://msdn.microsoft.com/en-us/library/aa365247(v=vs.85).aspx
+  " > File I/O functions in the Windows API convert "/" to "\" as part of
+  " > converting the name to an NT-style name, except when using the "\\?\"
+  " > prefix as detailed in the following sections.
+
   return split(
   \   glob(altr#_glob_path_from_pattern(a:pattern, a:matched_parts)),
   \   "\n"
