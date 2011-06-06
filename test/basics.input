@@ -519,6 +519,24 @@ endfunction
 
 
 
+function s:describe__autoload()  "{{{1
+  It should keep the rule table before and after reloading autoload script.
+
+  call altr#reset()
+  call altr#define('%.vim', '%.txt')
+  let old_rule_table = copy(altr#_rule_table())
+
+  runtime! autoload/altr.vim
+
+  let new_rule_table = copy(altr#_rule_table())
+  Should new_rule_table ==# old_rule_table
+
+  call altr#reset()
+endfunction
+
+
+
+
 function s:describe__plugin_definitions()  "{{{1
   It should be loaded.
 

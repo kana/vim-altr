@@ -319,8 +319,6 @@ function! altr#_rule_table()  "{{{2
   return s:rule_table
 endfunction
 
-let s:rule_table = {}
-
 
 
 
@@ -386,7 +384,10 @@ endfunction
 " Startup  "{{{2
 
 if !exists('s:loaded')
+  let s:rule_table = {}
+
   call altr#define_defaults()
+
   let s:loaded = !0
 endif
 

@@ -110,6 +110,10 @@
 ---- It should show an undefined rule well. 
 .
 
+==== autoload 
+---- It should keep the rule table before and after reloading autoload script. 
+.
+
 ==== plugin_definitions 
 ---- It should be loaded. 
 .
@@ -123,4 +127,4 @@
 **** Result ****
 
 
-125 examples, 0 failures
+126 examples, 0 failures
