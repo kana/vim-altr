@@ -323,10 +323,10 @@ endfunction
 
 
 function! altr#_show_rule(rule)  "{{{2
-  echo printf('%s -> %s -> %s',
+  echo printf('%s <- %s -> %s',
+  \           string(a:rule.back_pattern),
   \           string(a:rule.current_pattern),
-  \           string(a:rule.forward_pattern),
-  \           string(a:rule.back_pattern))
+  \           string(a:rule.forward_pattern))
 endfunction
 
 

@@ -170,7 +170,7 @@ function s:describe__altr_show()  "{{{1
   redir => output
   silent call altr#show('plugin/%.vim')
   redir END
-  Should output ==# "\n'plugin/%.vim' -> 'syntax/%.vim' -> 'lang/%.vim'"
+  Should output ==# "\n'lang/%.vim' <- 'plugin/%.vim' -> 'syntax/%.vim'"
 
   It should show an undefined rule well.
 
@@ -407,7 +407,7 @@ function s:describe__altr__show_rule()  "{{{1
   redir => output
   silent call altr#_show_rule(altr#_make_rule('current', 'forward', 'back'))
   redir END
-  Should output ==# "\n'current' -> 'forward' -> 'back'"
+  Should output ==# "\n'back' <- 'current' -> 'forward'"
 endfunction
 
 
