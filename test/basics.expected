@@ -44,6 +44,10 @@
 ---- It should perform matching properly. 
 .......
 
+==== altr normalize buffer name
+---- It should normalize given buffer name properly. 
+...
+
 ==== altr priority from rule
 ---- It should calculate priority of a given rule properly. 
 .....
@@ -127,4 +131,4 @@
 **** Result ****
 
 
-126 examples, 0 failures
+129 examples, 0 failures

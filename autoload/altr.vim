@@ -311,6 +311,13 @@ endfunction
 
 
 
+function! altr#_normalize_buffer_name(buffer_name)  "{{{2
+  return substitute(a:buffer_name, '\\', '/', 'g')
+endfunction
+
+
+
+
 function! altr#_priority_from_rule(rule)  "{{{2
   let p = len(substitute(a:rule.current_pattern, '[^%]', '', 'g'))
   let s = len(substitute(a:rule.current_pattern, '[^*]', '', 'g'))

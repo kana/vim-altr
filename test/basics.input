@@ -372,6 +372,17 @@ endfunction
 
 
 
+function s:describe__altr__normalize_buffer_name()  "{{{1
+  It should normalize given buffer name properly.
+
+  Should altr#_normalize_buffer_name('foobar') ==# 'foobar'
+  Should altr#_normalize_buffer_name('foo/bar') ==# 'foo/bar'
+  Should altr#_normalize_buffer_name('foo\bar') ==# 'foo/bar'
+endfunction
+
+
+
+
 function s:describe__altr__priority_from_rule()  "{{{1
   It should calculate priority of a given rule properly.
 
