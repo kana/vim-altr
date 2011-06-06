@@ -204,15 +204,15 @@ endfunction
 
 
 
-function! altr#_infer_the_missing_path(basename, direction, rule_table)  "{{{2
+function! altr#_infer_the_missing_path(bufname, direction, rule_table)  "{{{2
   let rules = altr#_sort_rules(a:rule_table)
   for r in rules
-    let [matchedp, match] = altr#_match_with_buffer_name(r, a:basename)
+    let [matchedp, match] = altr#_match_with_buffer_name(r, a:bufname)
     if matchedp
       let step = (r.current_pattern =~# '\V*'
       \           ? 's:infer_step_2_a'
       \           : 's:infer_step_2_b')
-      let path = call(step, [a:basename, a:direction, a:rule_table, r, match])
+      let path = call(step, [a:bufname, a:direction, a:rule_table, r, match])
       if path isnot 0
         return path
       endif
@@ -222,12 +222,12 @@ function! altr#_infer_the_missing_path(basename, direction, rule_table)  "{{{2
   return 0
 endfunction
 
-function! s:infer_step_2_a(basename, direction, rule_table, rule, match)
+function! s:infer_step_2_a(bufname, direction, rule_table, rule, match)
   let paths = altr#_list_paths(a:rule.current_pattern, a:match)
-  let i = index(paths, a:basename)
+  let i = index(paths, a:bufname)
   if i == -1
     call s:warn('Something wrong - %s not found in %s',
-    \           string(a:basename),
+    \           string(a:bufname),
     \           string(a:rule.current_pattern))
     return 0
   endif
@@ -237,7 +237,7 @@ function! s:infer_step_2_a(basename, direction, rule_table, rule, match)
   elseif a:direction ==# 'back' && 0 <= i - 1
     return paths[i - 1]
   else
-    return s:infer_step_2_b(a:basename,
+    return s:infer_step_2_b(a:bufname,
     \                       a:direction,
     \                       a:rule_table,
     \                       a:rule,
@@ -245,7 +245,7 @@ function! s:infer_step_2_a(basename, direction, rule_table, rule, match)
   endif
 endfunction
 
-function! s:infer_step_2_b(basename, direction, rule_table, rule, match)
+function! s:infer_step_2_b(bufname, direction, rule_table, rule, match)
   let forward_p = a:direction ==# 'forward'
   let cr = a:rule
 
