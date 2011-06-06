@@ -2,6 +2,10 @@
 ---- It should escape special characters for replacement string for substitute(). 
 ........
 
+==== altr format rule
+---- It should show a given rule well. 
+.
+
 ==== altr glob path from pattern
 ---- It should return proper glob path from given pattern. 
 .....
@@ -50,10 +54,6 @@
 
 ==== altr rule table
 ---- It should contains the default rules at first. 
-.
-
-==== altr show rule
----- It should show a given rule well. 
 .
 
 ==== altr sort rules

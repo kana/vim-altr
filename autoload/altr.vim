@@ -135,7 +135,7 @@ function! altr#show(current_pattern)  "{{{2
   if v is 0
     call s:notice('No such rule: %s', string(a:current_pattern))
   else
-    call altr#_show_rule(v)
+    echo altr#_format_rule(v)
   endif
 endfunction
 
@@ -180,6 +180,16 @@ function! altr#_escape_replacement(s)  "{{{2
   " According to :help substitute() and :help sub-replace-special,
   " only \ and & must be escaped.
   return escape(a:s, '\&')
+endfunction
+
+
+
+
+function! altr#_format_rule(rule)  "{{{2
+  return printf('%s <- %s -> %s',
+  \             string(a:rule.back_pattern),
+  \             string(a:rule.current_pattern),
+  \             string(a:rule.forward_pattern))
 endfunction
 
 
@@ -317,16 +327,6 @@ endfunction
 
 function! altr#_rule_table()  "{{{2
   return s:rule_table
-endfunction
-
-
-
-
-function! altr#_show_rule(rule)  "{{{2
-  echo printf('%s <- %s -> %s',
-  \           string(a:rule.back_pattern),
-  \           string(a:rule.current_pattern),
-  \           string(a:rule.forward_pattern))
 endfunction
 
 
