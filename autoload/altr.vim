@@ -303,7 +303,15 @@ endfunction
 
 
 function! altr#_match_with_buffer_name(rule, buffer_name)  "{{{2
-  let xs = matchlist(a:buffer_name,
+  " NB: On Windows environments, '\' and '/' can be used interchangably to
+  " glob paths.  Windows API takes care of this path separator convention.
+  " But buffer name matching is performed in the Vim world, not in Windows
+  " API.  So that a:buffer_name should be normalized to use the same rule
+  " definitions for both Windows environments and non-Windows environments.
+  "
+  " Souce: http://msdn.microsoft.com/en-us/library/aa365247(v=vs.85).aspx
+
+  let xs = matchlist(altr#_normalize_buffer_name(a:buffer_name),
   \                  altr#_regexp_from_pattern(a:rule.current_pattern))
   return [!empty(xs), xs]
 endfunction

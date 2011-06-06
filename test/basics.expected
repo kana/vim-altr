@@ -43,6 +43,8 @@
 ==== altr match with buffer name
 ---- It should perform matching properly. 
 .......
+---- It should perform matching properly even if path separator is '\'. 
+..
 
 ==== altr normalize buffer name
 ---- It should normalize given buffer name properly. 
@@ -131,4 +133,4 @@
 **** Result ****
 
 
-129 examples, 0 failures
+131 examples, 0 failures

@@ -367,6 +367,13 @@ function s:describe__altr__match_with_buffer_name()  "{{{1
   \      ==# [!0, x.m('plugin/altr.vim', '', 'altr')]
   Should M(R('plugin/%.vim', '', ''), '~/.vim/plugin/altr.vim')
   \      ==# [!0, x.m('~/.vim/plugin/altr.vim', '~/.vim/', 'altr')]
+
+  It should perform matching properly even if path separator is '\'.
+
+  Should M(R('plugin/%.vim', '', ''), 'plugin\altr.vim')
+  \      ==# [!0, x.m('plugin/altr.vim', '', 'altr')]
+  Should M(R('plugin/%.vim', '', ''), '~\.vim\plugin\altr.vim')
+  \      ==# [!0, x.m('~/.vim/plugin/altr.vim', '~/.vim/', 'altr')]
 endfunction
 
 
