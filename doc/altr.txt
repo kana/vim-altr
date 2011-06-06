@@ -161,6 +161,15 @@ In a pattern, some characters have special meaning:
 	For all patterns:
 		Matches 0 or more characters.
 
+/
+	For all patterns:
+		Matches both "/" and "\".
+
+		So that patterns should be written with only "/" as a path
+		separator to use the same rule definitions every platform,
+		especially both Windows environment and non-Windows
+		environment.
+
 Other character
 	For all patterns:
 		Matches the character itself.
