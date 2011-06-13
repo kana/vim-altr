@@ -389,7 +389,23 @@ function! altr#_switch(...)  "{{{2
   if path is 0
     call s:notice('No rule is matched to the current buffer name.')
   else
-    let n = bufnr(path)
+    " NB: bufnr() doesn't use a given {expr} literally.  According to :help
+    " bufname() --
+    "
+    " > A full match is preferred, otherwise a match at the start, end or
+    " > middle of the buffer name is accepted.
+    "
+    " Suppose that there are two buffers of which paths are "./doc/eval.txt"
+    " and "$VIMRUNTIME/doc/eval.txt".  The above sentence means that
+    " bufnr('doc/eval.txt') may return the buffer number for
+    " "$VIMRUNTIME/doc/eval.txt" rather than the one for "./doc/eval.txt".
+    "
+    " This behavior causes unexpected results.  {expr} for bufnr() should be
+    " escaped properly.  According to :help bufname() --
+    "
+    " > If you only want a full match then put "^" at the start and "$" at the
+    " > end of the pattern.
+    let n = bufnr(printf('^%s$', path))
     if n == -1
       edit `=path`
     else

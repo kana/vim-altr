@@ -82,6 +82,10 @@
 ---- It should keep the cursor line if possible. 
 .....
 
+==== altr switch  similar paths
+---- It should distinguish similar paths. 
+.............
+
 ==== altr_back 
 ---- It should switch to the missing path forward. 
 ....
@@ -133,4 +137,4 @@
 **** Result ****
 
 
-131 examples, 0 failures
+144 examples, 0 failures

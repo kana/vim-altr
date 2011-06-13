@@ -535,6 +535,53 @@ endfunction
 
 
 
+function s:describe__altr__switch__similar_paths()  "{{{1
+  let I = function('altr#_infer_the_missing_path')
+  let T = function('altr#_rule_table')
+
+  " Set up
+  call altr#remove_all()
+  call altr#define('autoload/%.vim', 'doc/%.txt', 'plugin/%.vim')
+  let pid = getpid()
+  let tmpdir = printf('tmp/%s', pid)
+  call mkdir(printf('%s/doc', tmpdir), 'p')
+  call writefile([], printf('%s/doc/eval.txt', tmpdir))
+  silent help eval.txt | close
+  cd `=tmpdir`
+
+  It should distinguish similar paths.
+
+  let bn_help = bufnr(printf('^%s/doc/eval.txt$', $VIMRUNTIME))
+  Should bn_help != -1
+  Should bufnr('doc/eval.txt') == bn_help
+  Should I('autoload/eval.vim', 'forward', T()) is# 'doc/eval.txt'
+  enew!
+  Should bufname('') ==# ''
+  silent! call altr#_switch('autoload/eval.vim', 'forward', T())
+  Should bufname('') ==# 'doc/eval.txt'
+  Should bufnr('') != bn_help
+
+  let bn_tmp = bufnr(printf('%s/doc/eval.txt', getcwd()), !0)
+  Should bn_tmp != -1
+  Should bn_tmp != bn_help
+  Should bufnr('doc/eval.txt') == bn_tmp
+  Should I('autoload/eval.vim', 'forward', T()) is# 'doc/eval.txt'
+  enew!
+  Should bufname('') ==# ''
+  silent! call altr#_switch('autoload/eval.vim', 'forward', T())
+  Should bufname('') ==# 'doc/eval.txt'
+  Should bufnr('') == bn_tmp
+
+  " Tear down
+  cd -
+  enew!
+  silent execute '!' 'rm -r' tmpdir
+  call altr#reset()
+endfunction
+
+
+
+
 function s:describe__autoload()  "{{{1
   It should keep the rule table before and after reloading autoload script.
 
