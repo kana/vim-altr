@@ -51,7 +51,7 @@ INTRODUCTION					*altr-introduction*
 
 For example, suppose that you are developing a Vim plugin which is called
 "foo".  You often edit specific files such as "autoload/foo.vim",
-"doc/foo.vim", "plugin/foo.vim", etc.  Sometimes one of the files is not
+"doc/foo.txt", "plugin/foo.vim", etc.  Sometimes one of the files is not
 displayed in any window.  So you have to open the missing file explicitly.
 But there are many ways to open the missing file.  How do you open the missing
 file?  |:edit|, |:buffer|, or your favorite buffer-management plugin?
