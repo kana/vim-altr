@@ -62,7 +62,10 @@ describe 'Default rules'
   it 'has rules for C family'
     call t:.test([
     \   't/c-family/base.c',
+    \   't/c-family/base.cpp',
+    \   't/c-family/base.m',
     \   't/c-family/base.h',
+    \   't/c-family/base.hpp',
     \ ])
   end
 
