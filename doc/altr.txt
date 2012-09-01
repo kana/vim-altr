@@ -1,8 +1,8 @@
 *altr.txt*	Switch to the missing file without interaction
 
 Version @@VERSION@@
-Script ID: -
-Copyright (C) 2011 Kana Natsuno <http://whileimautomaton.net/>
+Script ID: 4202
+Copyright (C) 2011-2012 Kana Natsuno <http://whileimautomaton.net/>
 License: So-called MIT/X license  {{{
     Permission is hereby granted, free of charge, to any person obtaining
     a copy of this software and associated documentation files (the
@@ -73,7 +73,7 @@ Latest version:
 http://github.com/kana/vim-altr
 
 Document in HTML format:
-http://kana.github.com/config/vim/altr.html
+http://vim-doc.heroku.com/view?https://github.com/kana/vim-altr/blob/master/doc/altr.txt
 
 
 
@@ -391,6 +391,12 @@ BUGS						*altr-bugs*
 
 ==============================================================================
 CHANGELOG					*altr-changelog*
+
+0.0.2	2012-09-01T15:07:32+09:00		*altr-changelog-0.0.2*
+	- Add default rules for C++ and Objective-C.
+	  (Thank Alejandro Exojo for the patch.)
+	- Fix |altr#forward()| and |altr#back()| to distinguish similar paths.
+	  There was some possibility to swith to wrong buffers.
 
 0.0.0	2011-05-20T23:39:12+09:00		*altr-changelog-0.0.0*
 	- Initial version.
