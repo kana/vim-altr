@@ -337,9 +337,12 @@ For Vim script: >
 	after/syntax/*/%.vim
 >
 
-For C language: >
+For C, C++ and Objective-C: >
 	%.c
+	%.cpp
+	%.m
 	%.h
+	%.hpp
 <
 
 For ASP.NET: >
