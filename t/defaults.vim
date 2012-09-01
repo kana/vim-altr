@@ -65,4 +65,23 @@ describe 'Default rules'
     \   't/c-family/base.h',
     \ ])
   end
+
+  it 'has rules for ASP.NET'
+    call t:.test([
+    \   't/asp.net/base.asax',
+    \   't/asp.net/base.asax.cs',
+    \ ])
+    call t:.test([
+    \   't/asp.net/base.ascx',
+    \   't/asp.net/base.ascx.cs',
+    \   't/asp.net/base.ascx.designer.cs',
+    \   't/asp.net/base.ascx.resx',
+    \ ])
+    call t:.test([
+    \   't/asp.net/base.aspx',
+    \   't/asp.net/base.aspx.cs',
+    \   't/asp.net/base.aspx.designer.cs',
+    \   't/asp.net/base.aspx.resx',
+    \ ])
+  end
 end
