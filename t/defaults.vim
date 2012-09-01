@@ -58,4 +58,11 @@ describe 'Default rules'
     \   't/vim/after/syntax/any2/base.vim',
     \ ])
   end
+
+  it 'has rules for C family'
+    call t:.test([
+    \   't/c-family/base.c',
+    \   't/c-family/base.h',
+    \ ])
+  end
 end
