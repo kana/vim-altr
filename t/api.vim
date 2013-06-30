@@ -1,5 +1,9 @@
 runtime! plugin/altr.vim
 
+function! P(path)
+  return fnamemodify(a:path, ':p')
+endfunction
+
 
 
 
@@ -11,16 +15,16 @@ describe 'altr#back'
 
   it 'should switch to the missing path forward'
     silent view autoload/altr.vim
-    Expect bufname('%') ==# 'autoload/altr.vim'
+    Expect P(bufname('%')) ==# P('autoload/altr.vim')
 
     silent! call altr#back()
-    Expect bufname('%') ==# 'plugin/altr.vim'
+    Expect P(bufname('%')) ==# P('plugin/altr.vim')
 
     silent! call altr#back()
-    Expect bufname('%') ==# 'doc/altr.txt'
+    Expect P(bufname('%')) ==# P('doc/altr.txt')
 
     silent! call altr#back()
-    Expect bufname('%') ==# 'autoload/altr.vim'
+    Expect P(bufname('%')) ==# P('autoload/altr.vim')
   end
 
   after
@@ -104,16 +108,16 @@ describe 'altr#forward'
 
   it 'should switch to the missing path forward'
     silent view autoload/altr.vim
-    Expect bufname('%') ==# 'autoload/altr.vim'
+    Expect P(bufname('%')) ==# P('autoload/altr.vim')
 
     silent! call altr#forward()
-    Expect bufname('%') ==# 'doc/altr.txt'
+    Expect P(bufname('%')) ==# P('doc/altr.txt')
 
     silent! call altr#forward()
-    Expect bufname('%') ==# 'plugin/altr.vim'
+    Expect P(bufname('%')) ==# P('plugin/altr.vim')
 
     silent! call altr#forward()
-    Expect bufname('%') ==# 'autoload/altr.vim'
+    Expect P(bufname('%')) ==# P('autoload/altr.vim')
   end
 end
 

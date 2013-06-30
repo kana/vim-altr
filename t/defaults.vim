@@ -1,5 +1,9 @@
 runtime! plugin/altr.vim
 
+function! P(path)
+  return fnamemodify(a:path, ':p')
+endfunction
+
 describe 'Default rules'
   before
     tabnew
@@ -11,7 +15,7 @@ describe 'Default rules'
         else
           silent call altr#forward()
         endif
-        Expect [i, bufname('%')] ==# [i, a:files[i]]
+        Expect [i, P(bufname('%'))] ==# [i, P(a:files[i])]
       endfor
     endfunction
   end
