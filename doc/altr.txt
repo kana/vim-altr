@@ -391,6 +391,13 @@ BUGS						*altr-bugs*
 ==============================================================================
 CHANGELOG					*altr-changelog*
 
+0.0.3	2013-06-30T17:34:48+09:00		*altr-changelog-0.0.3*
+	- Fix |altr#forward()| and |altr#back()| to switch to a proper file
+	  if the current file exists in the current directory.  (Thank @deris
+	  for the patch.)
+	- Fix wrong usage document for |altr#show()|.  (Thank @thinca for the
+	  report).
+
 0.0.2	2012-09-01T15:07:32+09:00		*altr-changelog-0.0.2*
 	- Add default rules for C++ and Objective-C.
 	  (Thank Alejandro Exojo for the patch.)
