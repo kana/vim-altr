@@ -113,9 +113,8 @@ altr#remove_all()				*altr#remove_all()*
 altr#reset()					*altr#reset()*
 			|altr#remove_all()|, then |altr#define_defaults()|.
 
-altr#show([{pat}])				*altr#show()*
-			Show rules for {pat}, or show all rules is {pat} is
-			omitted.
+altr#show({pat})				*altr#show()*
+			Show rules for {pat}.
 
 
 ------------------------------------------------------------------------------
