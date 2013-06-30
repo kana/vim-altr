@@ -23,7 +23,7 @@
 " }}}
 " Interface  "{{{1
 function! altr#back()  "{{{2
-  call altr#_switch(bufname('%'), 'back', altr#_rule_table())
+  call altr#_switch(expand('%:p'), 'back', altr#_rule_table())
 endfunction
 
 
@@ -99,7 +99,7 @@ endfunction
 
 
 function! altr#forward()  "{{{2
-  call altr#_switch(bufname('%'), 'forward', altr#_rule_table())
+  call altr#_switch(expand('%:p'), 'forward', altr#_rule_table())
 endfunction
 
 
