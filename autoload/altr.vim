@@ -407,7 +407,13 @@ function! altr#_switch(...)  "{{{2
     " > end of the pattern.
     let n = bufnr(printf('^%s$', path))
     if n == -1
-      edit `=path`
+      " The default 'statusline' uses %f to show a file path.  According to
+      " :help, %f shows a path "as typed or relative to current directory".
+      " Therefore, if a file is opened by ":edit ../../foo/bar/baz", %f always
+      " shows a file path as "../../foo/bar/baz" rather than "bar/baz", even
+      " if the current directory is "foo".  To simplify paths in status lines,
+      " here we have to use relative paths to open unvisited files.
+      edit `=fnamemodify(path, ':.')`
     else
       " NB: Unlike <C-^>, :[N]buffer doesn't restore the last cursor position
       " of a buffer perfectly.  Only the cursor line is restored.  The cursor
