@@ -206,8 +206,14 @@ endfunction
 
 function! altr#_glob_path_from_pattern(pattern, matched_parts)  "{{{2
   let prefix = a:matched_parts[1]
-  let basepart = altr#_escape_replacement(a:matched_parts[2])
-  return prefix . substitute(a:pattern, '%', basepart, 'g')
+  let s = a:pattern
+  let i = 2
+  while s =~ '%'
+    let basepart = altr#_escape_replacement(a:matched_parts[i])
+    let s = substitute(s, '%', basepart, '')
+    let i += 1
+  endwhile
+  return prefix . s
 endfunction
 
 
@@ -355,7 +361,7 @@ function! altr#_regexp_from_pattern(pattern)  "{{{2
   let p = a:pattern
   let p = escape(p, '\\')
   let p = substitute(p, '\V*', '\\.\\*', 'g')
-  let p = substitute(p, '\V%', '\\(\\.\\*\\)', '')
+  let p = substitute(p, '\V%', '\\(\\.\\*\\)', 'g')
   let p = printf('\V\^\(\.\{-}\)%s\$', p)
   return p
 endfunction
