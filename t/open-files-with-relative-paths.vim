@@ -8,14 +8,14 @@ describe 'altr#forward and altr#back'
   end
 
   it 'open a file with a relative path'
-    edit t/vim/doc/base.txt
-    Expect bufname('%') ==# 't/vim/doc/base.txt'
+    edit t/fixtures/vim/doc/base.txt
+    Expect bufname('%') ==# 't/fixtures/vim/doc/base.txt'
 
     call altr#forward()
-    Expect bufname('%') ==# 't/vim/ftdetect/base.vim'
+    Expect bufname('%') ==# 't/fixtures/vim/ftdetect/base.vim'
 
     call altr#back()
     call altr#back()
-    Expect bufname('%') ==# 't/vim/compiler/base.vim'
+    Expect bufname('%') ==# 't/fixtures/vim/compiler/base.vim'
   end
 end

@@ -1,5 +1,11 @@
 runtime! plugin/altr.vim
 
+let s:to_be_error_info = {}
+function! s:to_be_error_info.match(actual)
+  return type(a:actual) == type({}) && has_key(a:actual, 'message')
+endfunction
+call vspec#customize_matcher('to_be_error_info', s:to_be_error_info)
+
 
 
 
@@ -76,8 +82,8 @@ describe 'altr#_infer_the_missing_path'
     call altr#reset()
   end
 
-  it 'should return 0 if there is no rule to match against basename (1-b)'
-    Expect b:I('autoload/altr.vim', 'forward', b:T()) is 0
+  it 'should return error info if there is no rule matching to basename (1-b)'
+    Expect b:I('autoload/altr.vim', 'forward', b:T()) to_be_error_info
   end
 
   it 'should return a inferred path with "literal" rules (1-a, 2-b)'
