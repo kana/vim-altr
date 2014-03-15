@@ -15,22 +15,22 @@ describe 'Switching API'
   end
 
   it 'uses a full path to guess the next file'
-    lcd ./t/vim/autoload
+    lcd ./t/fixtures/vim/indent
 
     edit base.vim
-    Expect P(bufname('%')) ==# P('../../../t/vim/autoload/base.vim')
+    Expect P(bufname('%')) ==# P('../../../../t/fixtures/vim/indent/base.vim')
 
     call altr#forward()
-    Expect P(bufname('%')) ==# P('../../../t/vim/colors/base.vim')
+    Expect P(bufname('%')) ==# P('../../../../t/fixtures/vim/keymap/base.vim')
   end
 
   it 'uses a full path to guess the previous file'
-    lcd ./t/vim/doc
+    lcd ./t/fixtures/vim/plugin
 
-    edit base.txt
-    Expect P(bufname('%')) ==# P('../../../t/vim/doc/base.txt')
+    edit base.vim
+    Expect P(bufname('%')) ==# P('../../../../t/fixtures/vim/plugin/base.vim')
 
     call altr#back()
-    Expect P(bufname('%')) ==# P('../../../t/vim/compiler/base.vim')
+    Expect P(bufname('%')) ==# P('../../../../t/fixtures/vim/lang/base.vim')
   end
 end

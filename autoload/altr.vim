@@ -147,6 +147,15 @@ endfunction
 
 
 " Misc.  "{{{1
+" Constants  "{{{2
+
+let s:E_NO_RULE = {'message': 'No rule is matched to the current buffer name.'}
+let s:E_NO_NEXT_FILE = {'message': 'The next file is not found.'}
+let s:E_NO_PREVIOUS_FILE = {'message': 'The previous file is not found.'}
+
+
+
+
 function! s:error(format, ...)  "{{{2
   throw call('s:format', a:000)
 endfunction
@@ -206,6 +215,7 @@ endfunction
 
 function! altr#_infer_the_missing_path(bufname, direction, rule_table)  "{{{2
   let rules = altr#_sort_rules(a:rule_table)
+  let rule_found = 0
   for r in rules
     let [matchedp, match] = altr#_match_with_buffer_name(r, a:bufname)
     if matchedp
@@ -216,10 +226,14 @@ function! altr#_infer_the_missing_path(bufname, direction, rule_table)  "{{{2
       if path isnot 0
         return path
       endif
+      let rule_found = 1
     endif
   endfor
 
-  return 0
+  return
+  \ !rule_found ? s:E_NO_RULE :
+  \ a:direction ==# 'forward' ? s:E_NO_NEXT_FILE :
+  \ s:E_NO_PREVIOUS_FILE
 endfunction
 
 function! s:infer_step_2_a(bufname, direction, rule_table, rule, match)
@@ -251,6 +265,10 @@ function! s:infer_step_2_b(bufname, direction, rule_table, rule, match)
 
   while !0
     let pattern = cr[forward_p ? 'forward_pattern' : 'back_pattern']
+    if pattern ==# a:rule.current_pattern
+      break
+    endif
+
     let paths = altr#_list_paths(pattern, a:match)
     if !empty(paths)
       return paths[forward_p ? 0 : -1]
@@ -261,9 +279,6 @@ function! s:infer_step_2_b(bufname, direction, rule_table, rule, match)
     if cr is 0
       call s:error('Rule for %s is not defined.  Something is wrong.',
       \            string(pattern))
-    endif
-    if cr ==# a:rule
-      break
     endif
   endwhile
 
@@ -386,8 +401,10 @@ endfunction
 
 function! altr#_switch(...)  "{{{2
   let path = call('altr#_infer_the_missing_path', a:000)
-  if path is 0
-    call s:notice('No rule is matched to the current buffer name.')
+  if path is s:E_NO_RULE
+  \  || path is s:E_NO_NEXT_FILE
+  \  || path is s:E_NO_PREVIOUS_FILE
+    call s:notice(path.message)
   else
     " NB: bufnr() doesn't use a given {expr} literally.  According to :help
     " bufname() --
