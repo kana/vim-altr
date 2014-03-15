@@ -439,6 +439,19 @@ BUGS						*altr-bugs*
 ==============================================================================
 CHANGELOG					*altr-changelog*
 
+0.1.0	2014-03-15T15:20:17+09:00		*altr-changelog-0.1.0*
+	- Support multiple %s in patterns.  See also |altr-rule-example-3|.
+	- Add default rules for Vim plugins which are based on
+	  vim-operator-user and vim-textobj-user.
+	- Improve messages for cases when there is no next/previous file.
+	- Fix to simplify paths shown in status lines (with %f).  In old
+	  versions, unvisited files are opened by :edit with absolute paths
+	  even if the files are below the current directory.  It causes long
+	  paths are shown in status lines.
+	- Fix the default rules for Vim syntax files.  In old versions, syntax
+	  files in nested directories like "syntax/foo/bar.vim" are not
+	  detected properly.
+
 0.0.3	2013-06-30T17:34:48+09:00		*altr-changelog-0.0.3*
 	- Fix |altr#forward()| and |altr#back()| to switch to a proper file
 	  if the current file exists in the current directory.  (Thank @deris
