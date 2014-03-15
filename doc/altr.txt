@@ -378,6 +378,12 @@ For Vim script: >
 	after/syntax/*/%.vim
 >
 
+For opeartor-user and textobj-user based Vim plugins: >
+	autoload/%/%.vim
+	doc/%/%.vim
+	plugin/%/%.vim
+>
+
 For C, C++ and Objective-C: >
 	%.c
 	%.cpp

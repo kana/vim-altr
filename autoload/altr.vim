@@ -86,6 +86,8 @@ function! altr#define_defaults()  "{{{2
   let vim_after_runtime_files = map(copy(vim_runtime_files), '"after/".v:val')
   call altr#define(vim_after_runtime_files + vim_runtime_files)
 
+  call altr#define('autoload/%/%.vim', 'doc/%-%.txt', 'plugin/%/%.vim')
+
   call altr#define('%.c', '%.cpp', '%.m', '%.h', '%.hpp')
 
   call altr#define('%.asax', '%.asax.cs')

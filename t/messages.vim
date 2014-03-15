@@ -36,28 +36,4 @@ describe 'altr#forward / altr#back'
     Expect 'call altr#back()' to_echo 'The previous file is not found'
     Expect bufname('%') ==# path
   end
-
-  it 'shows a message if there is no rule for the current buffer (2)'
-    " FIXME: Add rules for this case.
-    let path = 't/fixtures/vim/autoload/operator/foo.vim'
-    edit `=path`
-
-    Expect 'call altr#forward()' to_echo 'No rule is matched'
-    Expect bufname('%') ==# path
-
-    Expect 'call altr#back()' to_echo 'No rule is matched'
-    Expect bufname('%') ==# path
-  end
-
-  it 'shows a message if there is no next/previous file (2)'
-    " FIXME: Add rules for this case.
-    let path = 't/fixtures/vim/doc/operator-foo.txt'
-    edit `=path`
-
-    Expect 'call altr#forward()' to_echo 'The next file is not found'
-    Expect bufname('%') ==# path
-
-    Expect 'call altr#back()' to_echo 'The previous file is not found'
-    Expect bufname('%') ==# path
-  end
 end
