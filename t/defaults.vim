@@ -63,6 +63,22 @@ describe 'Default rules'
     \ ])
   end
 
+  it 'has rules for operator-user based Vim plugins'
+    call t:.test([
+    \   't/fixtures/vim/autoload/operator/foo.vim',
+    \   't/fixtures/vim/doc/operator-foo.txt',
+    \   't/fixtures/vim/plugin/operator/foo.vim',
+    \ ])
+  end
+
+  it 'has rules for textobj-user based Vim plugins'
+    call t:.test([
+    \   't/fixtures/vim/autoload/textobj/foo.vim',
+    \   't/fixtures/vim/doc/textobj-foo.txt',
+    \   't/fixtures/vim/plugin/textobj/foo.vim',
+    \ ])
+  end
+
   it 'has rules for C family'
     call t:.test([
     \   't/fixtures/c-family/base.c',
