@@ -251,6 +251,10 @@ function! s:infer_step_2_b(bufname, direction, rule_table, rule, match)
 
   while !0
     let pattern = cr[forward_p ? 'forward_pattern' : 'back_pattern']
+    if pattern ==# a:rule.current_pattern
+      break
+    endif
+
     let paths = altr#_list_paths(pattern, a:match)
     if !empty(paths)
       return paths[forward_p ? 0 : -1]
@@ -261,9 +265,6 @@ function! s:infer_step_2_b(bufname, direction, rule_table, rule, match)
     if cr is 0
       call s:error('Rule for %s is not defined.  Something is wrong.',
       \            string(pattern))
-    endif
-    if cr ==# a:rule
-      break
     endif
   endwhile
 
