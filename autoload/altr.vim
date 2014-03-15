@@ -147,6 +147,13 @@ endfunction
 
 
 " Misc.  "{{{1
+" Constants  "{{{2
+
+let s:E_NO_RULE = {'message': 'No rule is matched to the current buffer name.'}
+
+
+
+
 function! s:error(format, ...)  "{{{2
   throw call('s:format', a:000)
 endfunction
@@ -219,7 +226,7 @@ function! altr#_infer_the_missing_path(bufname, direction, rule_table)  "{{{2
     endif
   endfor
 
-  return 0
+  return s:E_NO_RULE
 endfunction
 
 function! s:infer_step_2_a(bufname, direction, rule_table, rule, match)
@@ -387,8 +394,8 @@ endfunction
 
 function! altr#_switch(...)  "{{{2
   let path = call('altr#_infer_the_missing_path', a:000)
-  if path is 0
-    call s:notice('No rule is matched to the current buffer name.')
+  if path is s:E_NO_RULE
+    call s:notice(path.message)
   else
     " NB: bufnr() doesn't use a given {expr} literally.  According to :help
     " bufname() --
