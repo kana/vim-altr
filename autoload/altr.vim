@@ -150,6 +150,8 @@ endfunction
 " Constants  "{{{2
 
 let s:E_NO_RULE = {'message': 'No rule is matched to the current buffer name.'}
+let s:E_NO_NEXT_FILE = {'message': 'The next file is not found.'}
+let s:E_NO_PREVIOUS_FILE = {'message': 'The previous file is not found.'}
 
 
 
@@ -213,6 +215,7 @@ endfunction
 
 function! altr#_infer_the_missing_path(bufname, direction, rule_table)  "{{{2
   let rules = altr#_sort_rules(a:rule_table)
+  let rule_found = 0
   for r in rules
     let [matchedp, match] = altr#_match_with_buffer_name(r, a:bufname)
     if matchedp
@@ -223,10 +226,14 @@ function! altr#_infer_the_missing_path(bufname, direction, rule_table)  "{{{2
       if path isnot 0
         return path
       endif
+      let rule_found = 1
     endif
   endfor
 
-  return s:E_NO_RULE
+  return
+  \ !rule_found ? s:E_NO_RULE :
+  \ a:direction ==# 'forward' ? s:E_NO_NEXT_FILE :
+  \ s:E_NO_PREVIOUS_FILE
 endfunction
 
 function! s:infer_step_2_a(bufname, direction, rule_table, rule, match)
@@ -395,6 +402,8 @@ endfunction
 function! altr#_switch(...)  "{{{2
   let path = call('altr#_infer_the_missing_path', a:000)
   if path is s:E_NO_RULE
+  \  || path is s:E_NO_NEXT_FILE
+  \  || path is s:E_NO_PREVIOUS_FILE
     call s:notice(path.message)
   else
     " NB: bufnr() doesn't use a given {expr} literally.  According to :help
