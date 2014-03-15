@@ -1,6 +1,6 @@
 " altr - Switch to the missing file without interaction
 " Version: 0.0.3
-" Copyright (C) 2011-2013 Kana Natsuno <http://whileimautomaton.net/>
+" Copyright (C) 2011-2014 Kana Natsuno <http://whileimautomaton.net/>
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
