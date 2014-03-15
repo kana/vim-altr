@@ -361,7 +361,7 @@ For Vim script: >
 	lang/%.vim
 	plugin/%.vim
 	syntax/%.vim
-	syntax/*/%.vim
+	syntax/%/*.vim
 	after/autoload/%.vim
 	after/colors/%.vim
 	after/compiler/%.vim
@@ -375,7 +375,7 @@ For Vim script: >
 	after/lang/%.vim
 	after/plugin/%.vim
 	after/syntax/%.vim
-	after/syntax/*/%.vim
+	after/syntax/%/*.vim
 >
 
 For opeartor-user and textobj-user based Vim plugins: >

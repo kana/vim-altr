@@ -41,8 +41,8 @@ describe 'Default rules'
     \   't/fixtures/vim/lang/base.vim',
     \   't/fixtures/vim/plugin/base.vim',
     \   't/fixtures/vim/syntax/base.vim',
-    \   't/fixtures/vim/syntax/any1/base.vim',
-    \   't/fixtures/vim/syntax/any2/base.vim',
+    \   't/fixtures/vim/syntax/base/any1.vim',
+    \   't/fixtures/vim/syntax/base/any2.vim',
     \   't/fixtures/vim/after/autoload/base.vim',
     \   't/fixtures/vim/after/colors/base.vim',
     \   't/fixtures/vim/after/compiler/base.vim',
@@ -58,8 +58,8 @@ describe 'Default rules'
     \   't/fixtures/vim/after/lang/base.vim',
     \   't/fixtures/vim/after/plugin/base.vim',
     \   't/fixtures/vim/after/syntax/base.vim',
-    \   't/fixtures/vim/after/syntax/any1/base.vim',
-    \   't/fixtures/vim/after/syntax/any2/base.vim',
+    \   't/fixtures/vim/after/syntax/base/any1.vim',
+    \   't/fixtures/vim/after/syntax/base/any2.vim',
     \ ])
   end
 

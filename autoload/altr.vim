@@ -81,7 +81,7 @@ function! altr#define_defaults()  "{{{2
   \   'lang/%.vim',
   \   'plugin/%.vim',
   \   'syntax/%.vim',
-  \   'syntax/*/%.vim',
+  \   'syntax/%/*.vim',
   \ ]
   let vim_after_runtime_files = map(copy(vim_runtime_files), '"after/".v:val')
   call altr#define(vim_after_runtime_files + vim_runtime_files)
