@@ -49,21 +49,31 @@ INTRODUCTION					*altr-introduction*
 
 *altr* is a Vim plugin to switch files easily.
 
-For example, suppose that you are developing a Vim plugin which is called
-"foo".  You often edit specific files such as "autoload/foo.vim",
-"doc/foo.txt", "plugin/foo.vim", etc.  Sometimes one of the files is not
-displayed in any window.  So you have to open the missing file explicitly.
-But there are many ways to open the missing file.  How do you open the missing
-file?  |:edit|, |:buffer|, or your favorite buffer-management plugin?
+Suppose that you are developing a Vim plugin which is called "foo".  You often
+edit a set of specific files such as "autoload/foo.vim", "doc/foo.txt",
+"plugin/foo.vim", etc.  Sometimes one of the files is not displayed in any
+window.  So you have to open the missing file explicitly.  But there are many
+ways to open a file.  How do you open it?  |:edit|, |:buffer|, or your
+favorite buffer-management plugin?
 
 Whatever you choose, you have to type some keys to specify what the missing
 file is.  So there is no way to open the missing file WITHOUT INTERACTION.
 You'll probably wish if there is a command to open the missing file without
-interaction.  This plugin, altr, provides the command.
+interaction.  This plugin, altr, provides the command.  For example:
 
-The best keys and Ex commands to open the missing file are varied for each
-user.  So that altr doesn't define neither the default keys nor the default Ex
-commands.  See |altr-examples| for details.
+- Want to open "autoload/foo.vim" while you are editing "plugin/foo.vim"?
+  Type |<Plug>(altr-forward)|.
+- Then want to open "doc/foo.txt"?
+  Type |<Plug>(altr-forward)| again.
+- And typed |<Plug>(altr-forward)| too much?
+  Type |<Plug>(altr-back)| to back.
+
+The best keys and Ex commands to open the missing file depend on your tastes.
+So that altr doesn't define neither the default keys nor the default Ex
+commands.  See |altr-examples| for how to set up keys and Ex commands.
+
+There are several |altr-default-rules| for convenience.  You can also
+customize what files to be infered with |altr#define()|.
 
 
 Requirements:
@@ -71,9 +81,6 @@ Requirements:
 
 Latest version:
 http://github.com/kana/vim-altr
-
-Document in HTML format:
-http://vim-doc.heroku.com/view?https://github.com/kana/vim-altr/blob/master/doc/altr.txt
 
 
 
