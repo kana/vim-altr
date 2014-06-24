@@ -72,9 +72,6 @@ Requirements:
 Latest version:
 http://github.com/kana/vim-altr
 
-Document in HTML format:
-http://vim-doc.heroku.com/view?https://github.com/kana/vim-altr/blob/master/doc/altr.txt
-
 
 
 
