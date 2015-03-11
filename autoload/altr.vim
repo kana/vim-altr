@@ -88,7 +88,7 @@ function! altr#define_defaults()  "{{{2
 
   call altr#define('autoload/%/%.vim', 'doc/%-%.txt', 'plugin/%/%.vim')
 
-  call altr#define('%.c', '%.cpp', '%.m', '%.h', '%.hpp')
+  call altr#define('%.c', '%.cpp', '%.cc', '%.m', '%.mm', '%.h', '%.hpp')
 
   call altr#define('%.asax', '%.asax.cs')
   call altr#define('%.ascx', '%.ascx.cs', '%.ascx.designer.cs', '%.ascx.resx') 
