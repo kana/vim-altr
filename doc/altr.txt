@@ -391,7 +391,7 @@ For opeartor-user and textobj-user based Vim plugins: >
 	plugin/%/%.vim
 >
 
-For C, C++, Objective-C and Objective-C++:>
+For C, C++, Objective-C and Objective-C++: >
 	%.c
 	%.cpp
 	%.cc
