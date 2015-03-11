@@ -448,6 +448,10 @@ BUGS                                            *altr-bugs*
 ==============================================================================
 CHANGELOG                                       *altr-changelog*
 
+0.1.1   2015-03-11T21:21:31+09:00               *altr-changelog-0.1.1*
+        - Support *.cc as C++ files.
+        - Support *.mm as Objective-C++ files.
+
 0.1.0   2014-03-15T15:20:17+09:00               *altr-changelog-0.1.0*
         - Support multiple %s in patterns.  See also |altr-rule-example-3|.
         - Add default rules for Vim plugins which are based on
