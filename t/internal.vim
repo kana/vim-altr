@@ -42,25 +42,25 @@ describe 'altr#_glob_path_from_pattern'
   before
     enew!
     let b:G = function('altr#_glob_path_from_pattern')
-    function! b:m(prefix, basepart)
+    function! b:.m(prefix, basepart)
       return ['*UNUSED*', a:prefix, a:basepart] + repeat(['*UNUSED*'], 7)
     endfunction
   end
 
   it 'should return proper glob path from given pattern'
-    Expect b:G('plugin/%.vim', b:m('', 'altr')) ==# 'plugin/altr.vim'
-    Expect b:G('plugin/%.vim', b:m('./', 'altr')) ==# './plugin/altr.vim'
-    Expect b:G('plugin/%.vim', b:m('~/.vim/', 'altr')) ==# '~/.vim/plugin/altr.vim'
-    Expect b:G('*/%.vim', b:m('./', 'altr')) ==# './*/altr.vim'
-    Expect b:G('Makefile', b:m('~/.vim/', 'altr')) ==# '~/.vim/Makefile'
+    Expect b:G('plugin/%.vim', b:.m('', 'altr')) ==# 'plugin/altr.vim'
+    Expect b:G('plugin/%.vim', b:.m('./', 'altr')) ==# './plugin/altr.vim'
+    Expect b:G('plugin/%.vim', b:.m('~/.vim/', 'altr')) ==# '~/.vim/plugin/altr.vim'
+    Expect b:G('*/%.vim', b:.m('./', 'altr')) ==# './*/altr.vim'
+    Expect b:G('Makefile', b:.m('~/.vim/', 'altr')) ==# '~/.vim/Makefile'
   end
 
   it 'should return proper glob path from pattern with "\"s'
-    Expect b:G('plugin\%.vim', b:m('', 'altr')) ==# 'plugin\altr.vim'
-    Expect b:G('plugin\%.vim', b:m('.\', 'altr')) ==# '.\plugin\altr.vim'
-    Expect b:G('plugin\%.vim', b:m('~\.vim\', 'altr')) ==# '~\.vim\plugin\altr.vim'
-    Expect b:G('*\%.vim', b:m('.\', 'altr')) ==# '.\*\altr.vim'
-    Expect b:G('Makefile', b:m('~\.vim\', 'altr')) ==# '~\.vim\Makefile'
+    Expect b:G('plugin\%.vim', b:.m('', 'altr')) ==# 'plugin\altr.vim'
+    Expect b:G('plugin\%.vim', b:.m('.\', 'altr')) ==# '.\plugin\altr.vim'
+    Expect b:G('plugin\%.vim', b:.m('~\.vim\', 'altr')) ==# '~\.vim\plugin\altr.vim'
+    Expect b:G('*\%.vim', b:.m('.\', 'altr')) ==# '.\*\altr.vim'
+    Expect b:G('Makefile', b:.m('~\.vim\', 'altr')) ==# '~\.vim\Makefile'
   end
 end
 
@@ -70,7 +70,7 @@ end
 describe 'altr#_infer_the_missing_path'
   before
     enew!
-    function! b:NormalizePath(path)
+    function! b:.NormalizePath(path)
       return fnamemodify(a:path, ':p:.')
     endfunction
     let b:I = function('altr#_infer_the_missing_path')
@@ -104,12 +104,12 @@ describe 'altr#_infer_the_missing_path'
   it 'should work with an absolute path (1-a, 2-b)'
     cd ./plugin
       call altr#define('autoload/%.vim', 'NO SUCH DIR/%.vim', 'plugin/%.vim')
-      let d = b:NormalizePath(getcwd()) . '../'
+      let d = b:.NormalizePath(getcwd()) . '../'
 
-      Expect b:NormalizePath(b:I((d . 'autoload/altr.vim'), 'forward', b:T()))
-      \ is b:NormalizePath(d . 'plugin/altr.vim')
-      Expect b:NormalizePath(b:I((d . 'plugin/altr.vim'), 'forward', b:T()))
-      \ is b:NormalizePath(d . 'autoload/altr.vim')
+      Expect b:.NormalizePath(b:I((d . 'autoload/altr.vim'), 'forward', b:T()))
+      \ is b:.NormalizePath(d . 'plugin/altr.vim')
+      Expect b:.NormalizePath(b:I((d . 'plugin/altr.vim'), 'forward', b:T()))
+      \ is b:.NormalizePath(d . 'autoload/altr.vim')
     cd ..
   end
 
@@ -133,27 +133,27 @@ describe 'altr#_list_paths'
   before
     enew!
     let b:L = function('altr#_list_paths')
-    function! b:m(prefix, basepart)
+    function! b:.m(prefix, basepart)
       return ['*UNUSED*', a:prefix, a:basepart] + repeat(['*UNUSED*'], 7)
     endfunction
   end
 
   it 'should list an empty list if there is no maching paths'
-    Expect b:L('autoload/arpeggio.vim', b:m('./', 'altr')) ==# []
+    Expect b:L('autoload/arpeggio.vim', b:.m('./', 'altr')) ==# []
   end
 
   it 'should list a path with "literal" pattern'
-    Expect b:L('autoload/altr.vim', b:m('./', 'altr'))
+    Expect b:L('autoload/altr.vim', b:.m('./', 'altr'))
     \      ==# ['./autoload/altr.vim']
   end
 
   it 'should list a path with "%" pattern'
-    Expect b:L('autoload/%.vim', b:m('./', 'altr'))
+    Expect b:L('autoload/%.vim', b:.m('./', 'altr'))
     \      ==# ['./autoload/altr.vim']
   end
 
   it 'should list paths wiwth "*" pattern'
-    Expect b:L('*/%.vim', b:m('./', 'altr'))
+    Expect b:L('*/%.vim', b:.m('./', 'altr'))
     \ ==# ['./autoload/altr.vim', './plugin/altr.vim']
   end
 end
@@ -178,34 +178,34 @@ describe 'altr#_match_with_buffer_name'
     enew!
     let b:R = function('altr#_make_rule')
     let b:M = function('altr#_match_with_buffer_name')
-    function! b:m(whole, prefix, basepart)
+    function! b:.m(whole, prefix, basepart)
       return [a:whole, a:prefix, a:basepart] + repeat([''], 7)
     endfunction
   end
 
   it 'should perform matching properly'
     Expect b:M(b:R('%.vim', '', ''), 'altr.vim')
-    \      ==# [!0, b:m('altr.vim', '', 'altr')]
+    \      ==# [!0, b:.m('altr.vim', '', 'altr')]
     Expect b:M(b:R('%.vim', '', ''), 'plugin/altr.vim')
-    \      ==# [!0, b:m('plugin/altr.vim', '', 'plugin/altr')]
+    \      ==# [!0, b:.m('plugin/altr.vim', '', 'plugin/altr')]
     Expect b:M(b:R('%.vim', '', ''), 'doc/altr.txt')
     \      ==# [!!0, []]
     Expect b:M(b:R('*.vim', '', ''), 'altr.vim')
-    \      ==# [!0, b:m('altr.vim', '', '')]
+    \      ==# [!0, b:.m('altr.vim', '', '')]
     Expect b:M(b:R('Makefile', '', ''), 'Makefile')
-    \      ==# [!0, b:m('Makefile', '', '')]
+    \      ==# [!0, b:.m('Makefile', '', '')]
 
     Expect b:M(b:R('plugin/%.vim', '', ''), 'plugin/altr.vim')
-    \      ==# [!0, b:m('plugin/altr.vim', '', 'altr')]
+    \      ==# [!0, b:.m('plugin/altr.vim', '', 'altr')]
     Expect b:M(b:R('plugin/%.vim', '', ''), '~/.vim/plugin/altr.vim')
-    \      ==# [!0, b:m('~/.vim/plugin/altr.vim', '~/.vim/', 'altr')]
+    \      ==# [!0, b:.m('~/.vim/plugin/altr.vim', '~/.vim/', 'altr')]
   end
 
   it 'should perform matching properly even if path separator is "\"'
     Expect b:M(b:R('plugin/%.vim', '', ''), 'plugin\altr.vim')
-    \      ==# [!0, b:m('plugin/altr.vim', '', 'altr')]
+    \      ==# [!0, b:.m('plugin/altr.vim', '', 'altr')]
     Expect b:M(b:R('plugin/%.vim', '', ''), '~\.vim\plugin\altr.vim')
-    \      ==# [!0, b:m('~/.vim/plugin/altr.vim', '~/.vim/', 'altr')]
+    \      ==# [!0, b:.m('~/.vim/plugin/altr.vim', '~/.vim/', 'altr')]
   end
 end
 
