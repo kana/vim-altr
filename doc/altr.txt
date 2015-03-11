@@ -1,4 +1,4 @@
-*altr.txt*	Switch to the missing file without interaction
+*altr.txt*      Switch to the missing file without interaction
 
 Version 0.1.0
 Script ID: 4202
@@ -24,28 +24,28 @@ License: MIT license  {{{
     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 }}}
 
-CONTENTS					*altr-contents*
+CONTENTS                                        *altr-contents*
 
-Introduction		|altr-introduction|
-Interface		|altr-interface|
-  Functions		  |altr-functions|
-  Mappings		  |altr-mappings|
-Rules			|altr-rules|
-  Rule Definition	  |altr-rule-definition|
-  Pattern Definition	  |altr-pattern-definition|
-  Inference Algorithm	  |altr-inference-algorithm|
-  Rule Priorities	  |altr-priorities|
-  Rule Examples		  |altr-rule-examples|
-  Default Rules		  |altr-default-rules|
-Examples		|altr-examples|
-Bugs			|altr-bugs|
-Changelog		|altr-changelog|
+Introduction            |altr-introduction|
+Interface               |altr-interface|
+  Functions               |altr-functions|
+  Mappings                |altr-mappings|
+Rules                   |altr-rules|
+  Rule Definition         |altr-rule-definition|
+  Pattern Definition      |altr-pattern-definition|
+  Inference Algorithm     |altr-inference-algorithm|
+  Rule Priorities         |altr-priorities|
+  Rule Examples           |altr-rule-examples|
+  Default Rules           |altr-default-rules|
+Examples                |altr-examples|
+Bugs                    |altr-bugs|
+Changelog               |altr-changelog|
 
 
 
 
 ==============================================================================
-INTRODUCTION					*altr-introduction*
+INTRODUCTION                                    *altr-introduction*
 
 *altr* is a Vim plugin to switch files easily.
 
@@ -86,63 +86,63 @@ http://github.com/kana/vim-altr
 
 
 ==============================================================================
-INTERFACE					*altr-interface*
+INTERFACE                                       *altr-interface*
 
 ------------------------------------------------------------------------------
-FUNCTIONS					*altr-functions*
+FUNCTIONS                                       *altr-functions*
 
-altr#back()					*altr#back()*
-			Open the previous file which is inferred from the
-			current buffer.
+altr#back()                                     *altr#back()*
+                        Open the previous file which is inferred from the
+                        current buffer.
 
-altr#define({pat1}, ..., {patN})		*altr#define()*
+altr#define({pat1}, ..., {patN})                *altr#define()*
 altr#define({list-of-pats})
-			Define rules to infer the missing file from the
-			current buffer.  If rules for {pat1}, ..., or {patN}
-			already exist, those rules are overwritten by the new
-			rules.
+                        Define rules to infer the missing file from the
+                        current buffer.  If rules for {pat1}, ..., or {patN}
+                        already exist, those rules are overwritten by the new
+                        rules.
 
-			See |altr-rules| for details.
+                        See |altr-rules| for details.
 
-altr#define_defaults()				*altr#define_defaults()*
-			Define the default rules.
+altr#define_defaults()                          *altr#define_defaults()*
+                        Define the default rules.
 
-altr#forward()					*altr#forward()*
-			Open the next file which is inferred from the current
-			buffer.
+altr#forward()                                  *altr#forward()*
+                        Open the next file which is inferred from the current
+                        buffer.
 
-altr#remove({pat1}, ..., {patN})		*altr#remove()*
-			Remove rules for {pat1}, ..., and {patN}.
+altr#remove({pat1}, ..., {patN})                *altr#remove()*
+                        Remove rules for {pat1}, ..., and {patN}.
 
-altr#remove_all()				*altr#remove_all()*
-			Remove all rules to infer the missing file.
+altr#remove_all()                               *altr#remove_all()*
+                        Remove all rules to infer the missing file.
 
-altr#reset()					*altr#reset()*
-			|altr#remove_all()|, then |altr#define_defaults()|.
+altr#reset()                                    *altr#reset()*
+                        |altr#remove_all()|, then |altr#define_defaults()|.
 
-altr#show({pat})				*altr#show()*
-			Show rules for {pat}.
+altr#show({pat})                                *altr#show()*
+                        Show rules for {pat}.
 
 
 ------------------------------------------------------------------------------
-MAPPINGS					*altr-mappings*
+MAPPINGS                                        *altr-mappings*
 
 The following key mappings are defined in all modes.
 
-<Plug>(altr-back)				*<Plug>(altr-back)*
-			Same as |altr#back()|.
+<Plug>(altr-back)                               *<Plug>(altr-back)*
+                        Same as |altr#back()|.
 
-<Plug>(altr-forward)				*<Plug>(altr-forward)*
-			Same as |altr#forward()|.
+<Plug>(altr-forward)                            *<Plug>(altr-forward)*
+                        Same as |altr#forward()|.
 
 
 
 
 ==============================================================================
-RULES						*altr-rules*
+RULES                                           *altr-rules*
 
 ------------------------------------------------------------------------------
-RULE DEFINITION					*altr-rule-definition*
+RULE DEFINITION                                 *altr-rule-definition*
 
 A "rule" consists of three "patterns":
 
@@ -152,37 +152,37 @@ A "rule" consists of three "patterns":
 
 
 ------------------------------------------------------------------------------
-PATTERN DEFINITION				*altr-pattern-definition*
+PATTERN DEFINITION                              *altr-pattern-definition*
 
 A pattern is a string to express a set of paths (to files).
 In a pattern, some characters have special meaning:
 
 %
-	For current pattern:
-		Matches 0 or more characters.
-	For other patterns:
-		Matches characters which are matched in current pattern.
+        For current pattern:
+                Matches 0 or more characters.
+        For other patterns:
+                Matches characters which are matched in current pattern.
 
 *
-	For all patterns:
-		Matches 0 or more characters.
+        For all patterns:
+                Matches 0 or more characters.
 
 /
-	For all patterns:
-		Matches both "/" and "\".
+        For all patterns:
+                Matches both "/" and "\".
 
-		So that patterns should be written with only "/" as a path
-		separator to use the same rule definitions every platform,
-		especially both Windows environment and non-Windows
-		environment.
+                So that patterns should be written with only "/" as a path
+                separator to use the same rule definitions every platform,
+                especially both Windows environment and non-Windows
+                environment.
 
 Other character
-	For all patterns:
-		Matches the character itself.
+        For all patterns:
+                Matches the character itself.
 
 
 ------------------------------------------------------------------------------
-INFERENCE ALGORITHM				*altr-inference-algorithm*
+INFERENCE ALGORITHM                             *altr-inference-algorithm*
 
 The missing file is inferred according to the current buffer and existing
 rules with the following algorithm:
@@ -218,7 +218,7 @@ rules with the following algorithm:
 
 
 ------------------------------------------------------------------------------
-RULE PRIORITIES					*altr-rule-priorities*
+RULE PRIORITIES                                 *altr-rule-priorities*
 
 The priority of a rule is a number.  Higher value means higher priority.
 
@@ -244,43 +244,43 @@ For example:
 
 
 ------------------------------------------------------------------------------
-RULE EXAMPLES					*altr-rule-examples*
+RULE EXAMPLES                                   *altr-rule-examples*
 
-						*altr-rule-example-1*
+                                                *altr-rule-example-1*
 CASE 1: Simple patterns with single % ~
 
 Suppose that we have the following configuration:
 >
-	call altr#remove_all()
-	call altr#define('plugin/%.vim', 'doc/%.txt')
+        call altr#remove_all()
+        call altr#define('plugin/%.vim', 'doc/%.txt')
 <
 The following rules are defined by the configuration:
 
-	back pattern    | current pattern | forward pattern
-	----------------+-----------------+----------------
-	doc/%.txt       | plugin/%.vim    | doc/%.txt
-	plugin/%.vim    | doc/%.txt       | plugin/%.vim
+        back pattern    | current pattern | forward pattern
+        ----------------+-----------------+----------------
+        doc/%.txt       | plugin/%.vim    | doc/%.txt
+        plugin/%.vim    | doc/%.txt       | plugin/%.vim
 
 If the current buffer name is "plugin/foo.vim", both |altr#forward()| and
 |altr#back()| opens "doc/foo.txt".
 
-						*altr-rule-example-2*
+                                                *altr-rule-example-2*
 CASE 2: Patterns with * ~
 
 Suppose that we have the following configuration:
 >
-	call altr#remove_all()
-	call altr#define('ftplugin/%.vim',
-	\                'ftplugin/%_*.vim',
-	\                'ftplugin/%/*.vim')
+        call altr#remove_all()
+        call altr#define('ftplugin/%.vim',
+        \                'ftplugin/%_*.vim',
+        \                'ftplugin/%/*.vim')
 <
 The following rules are defined by the configuration:
 
-	back pattern     | current pattern  | forward pattern
-	-----------------+------------------+-----------------
-	ftplugin/%/*.vim | ftplugin/%.vim   | ftplugin/%_*.vim
-	ftplugin/%.vim   | ftplugin/%_*.vim | ftplugin/%/*.vim
-	ftplugin/%/*.vim | ftplugin/%/*.vim | ftplugin/%.vim
+        back pattern     | current pattern  | forward pattern
+        -----------------+------------------+-----------------
+        ftplugin/%/*.vim | ftplugin/%.vim   | ftplugin/%_*.vim
+        ftplugin/%.vim   | ftplugin/%_*.vim | ftplugin/%/*.vim
+        ftplugin/%/*.vim | ftplugin/%/*.vim | ftplugin/%.vim
 
 And suppose that the following files exist:
 
@@ -307,23 +307,23 @@ And |altr#back()| opens files in the following order:
 4. ftplugin/foo_mine.vim
 5. ftplugin/foo.vim
 
-						*altr-rule-example-3*
+                                                *altr-rule-example-3*
 CASE 3: Patterns with multiple %s ~
 
 Suppose that we have the following configuration:
 >
-	call altr#remove_all()
-	call altr#define('autoload/%/%.vim',
-	\                'doc/%-%.txt',
-	\                'plugin/%/%.vim')
+        call altr#remove_all()
+        call altr#define('autoload/%/%.vim',
+        \                'doc/%-%.txt',
+        \                'plugin/%/%.vim')
 <
 The following rules are defined by the configuration:
 
-	back pattern     | current pattern  | forward pattern
-	-----------------+------------------+-----------------
-	plugin/%/%.vim   | autoload/%/%.vim | doc/%-%.txt
-	autoload/%/%.vim | doc/%-%.txt      | plugin/%/%.vim
-	doc/%-%.txt      | plugin/%/%.vim   | autoload/%/%.vim
+        back pattern     | current pattern  | forward pattern
+        -----------------+------------------+-----------------
+        plugin/%/%.vim   | autoload/%/%.vim | doc/%-%.txt
+        autoload/%/%.vim | doc/%-%.txt      | plugin/%/%.vim
+        doc/%-%.txt      | plugin/%/%.vim   | autoload/%/%.vim
 
 And suppose that the following files exist:
 
@@ -349,95 +349,95 @@ And |altr#back()| opens files in the following order:
 
 
 ------------------------------------------------------------------------------
-DEFAULT RULES					*altr-default-rules*
+DEFAULT RULES                                   *altr-default-rules*
 
 The following rules are defined by default.  Please send feedback if you find
 some rule that should be defined default and the rule makes everyone happy.
 
 For Vim script: >
-	autoload/%.vim
-	colors/%.vim
-	compiler/%.vim
-	doc/%.txt
-	ftdetect/%.vim
-	ftplugin/%.vim
-	ftplugin/%_*.vim
-	ftplugin/%/*.vim
-	indent/%.vim
-	keymap/%.vim
-	lang/%.vim
-	plugin/%.vim
-	syntax/%.vim
-	syntax/%/*.vim
-	after/autoload/%.vim
-	after/colors/%.vim
-	after/compiler/%.vim
-	after/doc/%.txt
-	after/ftdetect/%.vim
-	after/ftplugin/%.vim
-	after/ftplugin/%_*.vim
-	after/ftplugin/%/*.vim
-	after/indent/%.vim
-	after/keymap/%.vim
-	after/lang/%.vim
-	after/plugin/%.vim
-	after/syntax/%.vim
-	after/syntax/%/*.vim
+        autoload/%.vim
+        colors/%.vim
+        compiler/%.vim
+        doc/%.txt
+        ftdetect/%.vim
+        ftplugin/%.vim
+        ftplugin/%_*.vim
+        ftplugin/%/*.vim
+        indent/%.vim
+        keymap/%.vim
+        lang/%.vim
+        plugin/%.vim
+        syntax/%.vim
+        syntax/%/*.vim
+        after/autoload/%.vim
+        after/colors/%.vim
+        after/compiler/%.vim
+        after/doc/%.txt
+        after/ftdetect/%.vim
+        after/ftplugin/%.vim
+        after/ftplugin/%_*.vim
+        after/ftplugin/%/*.vim
+        after/indent/%.vim
+        after/keymap/%.vim
+        after/lang/%.vim
+        after/plugin/%.vim
+        after/syntax/%.vim
+        after/syntax/%/*.vim
 >
 
 For opeartor-user and textobj-user based Vim plugins: >
-	autoload/%/%.vim
-	doc/%/%.vim
-	plugin/%/%.vim
+        autoload/%/%.vim
+        doc/%/%.vim
+        plugin/%/%.vim
 >
 
 For C, C++, Objective-C and Objective-C++: >
-	%.c
-	%.cpp
-	%.cc
-	%.m
-	%.mm
-	%.h
-	%.hpp
+        %.c
+        %.cpp
+        %.cc
+        %.m
+        %.mm
+        %.h
+        %.hpp
 <
 
 For ASP.NET: >
-	%.asax
-	%.asax.cs
+        %.asax
+        %.asax.cs
 
-	%.ascx
-	%.ascx.cs
-	%.ascx.designer.cs
-	%.ascx.resx
+        %.ascx
+        %.ascx.cs
+        %.ascx.designer.cs
+        %.ascx.resx
 
-	%.aspx
-	%.aspx.cs
-	%.aspx.designer.cs
-	%.aspx.resx
+        %.aspx
+        %.aspx.cs
+        %.aspx.designer.cs
+        %.aspx.resx
 <
 
 
 
 
 ==============================================================================
-EXAMPLES					*altr-examples*
+EXAMPLES                                        *altr-examples*
 
 (A) Use your favorite keys (such as <F2> and <S-F2>) to open the missing file:
 >
-	nmap <F2>  <Plug>(altr-forward)
-	nmap <S-F2>  <Plug>(altr-back)
+        nmap <F2>  <Plug>(altr-forward)
+        nmap <S-F2>  <Plug>(altr-back)
 <
 
 (B) Use your favorite Ex command (such as :A) to open the missing file:
 >
-	command! A  call altr#forward()
+        command! A  call altr#forward()
 <
 
 
 
 
 ==============================================================================
-BUGS						*altr-bugs*
+BUGS                                            *altr-bugs*
 
 - Currently there is no known bug.  Please send bug reports and/or feedback
   via: https://github.com/kana/vim-altr/issues
@@ -446,36 +446,36 @@ BUGS						*altr-bugs*
 
 
 ==============================================================================
-CHANGELOG					*altr-changelog*
+CHANGELOG                                       *altr-changelog*
 
-0.1.0	2014-03-15T15:20:17+09:00		*altr-changelog-0.1.0*
-	- Support multiple %s in patterns.  See also |altr-rule-example-3|.
-	- Add default rules for Vim plugins which are based on
-	  vim-operator-user and vim-textobj-user.
-	- Improve messages for cases when there is no next/previous file.
-	- Fix to simplify paths shown in status lines (with %f).  In old
-	  versions, unvisited files are opened by :edit with absolute paths
-	  even if the files are below the current directory.  It causes long
-	  paths are shown in status lines.
-	- Fix the default rules for Vim syntax files.  In old versions, syntax
-	  files in nested directories like "syntax/foo/bar.vim" are not
-	  detected properly.
+0.1.0   2014-03-15T15:20:17+09:00               *altr-changelog-0.1.0*
+        - Support multiple %s in patterns.  See also |altr-rule-example-3|.
+        - Add default rules for Vim plugins which are based on
+          vim-operator-user and vim-textobj-user.
+        - Improve messages for cases when there is no next/previous file.
+        - Fix to simplify paths shown in status lines (with %f).  In old
+          versions, unvisited files are opened by :edit with absolute paths
+          even if the files are below the current directory.  It causes long
+          paths are shown in status lines.
+        - Fix the default rules for Vim syntax files.  In old versions, syntax
+          files in nested directories like "syntax/foo/bar.vim" are not
+          detected properly.
 
-0.0.3	2013-06-30T17:34:48+09:00		*altr-changelog-0.0.3*
-	- Fix |altr#forward()| and |altr#back()| to switch to a proper file
-	  if the current file exists in the current directory.  (Thank @deris
-	  for the patch.)
-	- Fix wrong usage document for |altr#show()|.  (Thank @thinca for the
-	  report).
+0.0.3   2013-06-30T17:34:48+09:00               *altr-changelog-0.0.3*
+        - Fix |altr#forward()| and |altr#back()| to switch to a proper file
+          if the current file exists in the current directory.  (Thank @deris
+          for the patch.)
+        - Fix wrong usage document for |altr#show()|.  (Thank @thinca for the
+          report).
 
-0.0.2	2012-09-01T15:07:32+09:00		*altr-changelog-0.0.2*
-	- Add default rules for C++ and Objective-C.
-	  (Thank Alejandro Exojo for the patch.)
-	- Fix |altr#forward()| and |altr#back()| to distinguish similar paths.
-	  There was some possibility to swith to wrong buffers.
+0.0.2   2012-09-01T15:07:32+09:00               *altr-changelog-0.0.2*
+        - Add default rules for C++ and Objective-C.
+          (Thank Alejandro Exojo for the patch.)
+        - Fix |altr#forward()| and |altr#back()| to distinguish similar paths.
+          There was some possibility to swith to wrong buffers.
 
-0.0.0	2011-05-20T23:39:12+09:00		*altr-changelog-0.0.0*
-	- Initial version.
+0.0.0   2011-05-20T23:39:12+09:00               *altr-changelog-0.0.0*
+        - Initial version.
 
 
 
