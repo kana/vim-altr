@@ -83,7 +83,9 @@ describe 'Default rules'
     call t:.test([
     \   't/fixtures/c-family/base.c',
     \   't/fixtures/c-family/base.cpp',
+    \   't/fixtures/c-family/base.cc',
     \   't/fixtures/c-family/base.m',
+    \   't/fixtures/c-family/base.mm',
     \   't/fixtures/c-family/base.h',
     \   't/fixtures/c-family/base.hpp',
     \ ])
