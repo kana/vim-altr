@@ -401,6 +401,11 @@ For C, C++, Objective-C and Objective-C++: >
         %.hpp
 <
 
+For C#: >
+        %.cs
+        %.designer.cs
+<
+
 For ASP.NET: >
         %.asax
         %.asax.cs
