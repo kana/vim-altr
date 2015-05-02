@@ -453,6 +453,9 @@ BUGS                                            *altr-bugs*
 ==============================================================================
 CHANGELOG                                       *altr-changelog*
 
+0.2.0   2015-05-03T02:08:06+09:00               *altr-changelog-0.2.0*
+	- Add default rules for C# projects to switch *.cs and *.designer.cs.
+
 0.1.1   2015-03-11T21:21:31+09:00               *altr-changelog-0.1.1*
         - Support *.cc as C++ files.
         - Support *.mm as Objective-C++ files.
