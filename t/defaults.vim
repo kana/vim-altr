@@ -91,6 +91,13 @@ describe 'Default rules'
     \ ])
   end
 
+  it 'has rules for C#'
+    call t:.test([
+    \   't/fixtures/cs/base.cs',
+    \   't/fixtures/cs/base.designer.cs',
+    \ ])
+  end
+
   it 'has rules for ASP.NET'
     call t:.test([
     \   't/fixtures/asp.net/base.asax',
