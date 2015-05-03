@@ -1,6 +1,6 @@
 *altr.txt*      Switch to the missing file without interaction
 
-Version 0.1.1
+Version 0.2.0
 Script ID: 4202
 Copyright (C) 2011-2015 Kana Natsuno <http://whileimautomaton.net/>
 License: MIT license  {{{
@@ -452,6 +452,9 @@ BUGS                                            *altr-bugs*
 
 ==============================================================================
 CHANGELOG                                       *altr-changelog*
+
+0.2.0   2015-05-03T02:08:06+09:00               *altr-changelog-0.2.0*
+	- Add default rules for C# projects to switch *.cs and *.designer.cs.
 
 0.1.1   2015-03-11T21:21:31+09:00               *altr-changelog-0.1.1*
         - Support *.cc as C++ files.
