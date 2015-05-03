@@ -90,6 +90,8 @@ function! altr#define_defaults()  "{{{2
 
   call altr#define('%.c', '%.cpp', '%.cc', '%.m', '%.mm', '%.h', '%.hpp')
 
+  call altr#define('%.cs', '%.designer.cs')
+
   call altr#define('%.asax', '%.asax.cs')
   call altr#define('%.ascx', '%.ascx.cs', '%.ascx.designer.cs', '%.ascx.resx') 
   call altr#define('%.aspx', '%.aspx.cs', '%.aspx.designer.cs', '%.aspx.resx') 
