@@ -160,6 +160,7 @@ In a pattern, some characters have special meaning:
 %
         For current pattern:
                 Matches 0 or more characters as much as possible.
+		See also |altr-rule-example-4| to avoid greedy matching.
         For other patterns:
                 Matches characters which are matched in current pattern.
 
