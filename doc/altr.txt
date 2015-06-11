@@ -159,13 +159,13 @@ In a pattern, some characters have special meaning:
 
 %
         For current pattern:
-                Matches 0 or more characters.
+                Matches 0 or more characters as much as possible.
         For other patterns:
                 Matches characters which are matched in current pattern.
 
 *
         For all patterns:
-                Matches 0 or more characters.
+                Matches 0 or more characters as much as possible.
 
 /
         For all patterns:
