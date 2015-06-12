@@ -159,13 +159,14 @@ In a pattern, some characters have special meaning:
 
 %
         For current pattern:
-                Matches 0 or more characters.
+                Matches 0 or more characters as much as possible.
+		See also |altr-rule-example-4| to avoid greedy matching.
         For other patterns:
                 Matches characters which are matched in current pattern.
 
 *
         For all patterns:
-                Matches 0 or more characters.
+                Matches 0 or more characters as much as possible.
 
 /
         For all patterns:
@@ -346,6 +347,36 @@ And |altr#back()| opens files in the following order:
 1. plugin/textobj/foo.vim
 2. doc/textobj-foo.txt
 3. autoload/textobj/foo.vim
+
+                                                *altr-rule-example-4*
+CASE 4: Avoid greedy matching with %s ~
+
+Consider the following configuration:
+>
+        call altr#remove_all()
+        call altr#define('src/%.c',
+        \                'inc/%.h')
+<
+This rule is intended to switch between files such as `src/foo.c` and
+`inc/foo.h`.  This rule basically works, but it fails for some paths like the
+following:
+
+* `project/src/submodule1/inc/main.h`
+* `project/src/submodule1/src/main.c`
+
+With the rule, you can switch from `main.h` to `main.c`, but you can't switch
+from `main.c` to `main.h`.  Because `%` is greedy.  `%` matches many
+characters as much as possible.  So,
+
+* `%` in `inc/%.h` matches to `main`.
+* `%` in `src/%.c` matches to `submodule1/src/main`.
+
+You can avoid greedy matches with the following configuration:
+>
+        call altr#remove_all()
+        call altr#define('%/src/%.c',
+        \                '%/inc/%.h')
+<
 
 
 ------------------------------------------------------------------------------
