@@ -484,6 +484,9 @@ BUGS						*altr-bugs*
 ==============================================================================
 CHANGELOG					*altr-changelog*
 
+0.2.1	2015-06-14T22:19:04+09:00		*altr-changelog-0.2.1*
+	- Revise the document a bit.  See also |altr-rule-example-4|.
+
 0.2.0	2015-05-03T02:08:06+09:00		*altr-changelog-0.2.0*
 	- Add default rules for C# projects to switch *.cs and *.designer.cs.
 
