@@ -96,6 +96,8 @@ function! altr#define_defaults()  "{{{2
   call altr#define('%.ascx', '%.ascx.cs', '%.ascx.designer.cs', '%.ascx.resx') 
   call altr#define('%.aspx', '%.aspx.cs', '%.aspx.designer.cs', '%.aspx.resx') 
 
+  call altr#define('%/%.py', '%/test_%.py', '%/tests/test_%.py')
+
   " FIXME: Add more useful defaults.
 endfunction
 
