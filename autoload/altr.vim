@@ -432,8 +432,12 @@ function! altr#_switch(...)  "{{{2
     "
     " > If you only want a full match then put "^" at the start and "$" at the
     " > end of the pattern.
+    "
+    " NB: :bdelete-d file is marked as nobuflisted.  Switching back to such
+    " a file means reopening the file.  So that the file should be buflisted
+    " again.  But using :buffer to the file does not reset buflisted.
     let n = bufnr(printf('^%s$', path))
-    if n == -1
+    if n == -1 || !buflisted(n)
       " The default 'statusline' uses %f to show a file path.  According to
       " :help, %f shows a path "as typed or relative to current directory".
       " Therefore, if a file is opened by ":edit ../../foo/bar/baz", %f always
