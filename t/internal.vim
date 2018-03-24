@@ -356,7 +356,7 @@ describe 'altr#_switch'
 
   it 'should keep the cursor line if possible'
     silent! edit autoload/altr.vim
-    normal! L
+    normal! 50G
     let last_curcor_line = line('.')
     Expect bufname('%') ==# 'autoload/altr.vim'
     Expect last_curcor_line > 1
