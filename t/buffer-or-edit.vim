@@ -31,7 +31,7 @@ describe 'altr'
     Expect &l:buflisted to_be_true
   end
 
-  it 'uses :edit for a file :bdelete-d before'
+  it 'uses :edit for a file which seems to be :bdelete-d before'
     silent! edit autoload/altr.vim
     normal! 50G
     let last_curcor_line = line('.')
@@ -49,5 +49,23 @@ describe 'altr'
     Expect line('.') != last_curcor_line
     Expect line('.') == 1
     Expect &l:buflisted to_be_true
+  end
+
+  it 'ignores a buffer which is not associated with any file'
+    " autoload/altr.vim -> doc/altr.txt -> plugin/altr.vim -> syntax/altr.vim
+    "
+    " Sicne syntax/altr.vim is not an actual file, it will be ignored to infer
+    " a missing path.  The puspose of this test case is to check that :edit
+    " will never be used for a buffer like this.
+
+    file syntax/altr.vim
+    setlocal nobuflisted
+    Expect bufname('%') ==# 'syntax/altr.vim'
+
+    silent! call altr#forward()
+    Expect bufname('%') ==# 'autoload/altr.vim'
+
+    silent! call altr#back()
+    Expect bufname('%') ==# 'plugin/altr.vim'
   end
 end
