@@ -20,6 +20,7 @@ describe 'altr'
     let last_curcor_line = line('.')
     Expect bufname('%') ==# 'autoload/altr.vim'
     Expect last_curcor_line > 1
+    Expect &l:buflisted to_be_true
 
     silent! call altr#forward()
     Expect bufname('%') ==# 'doc/altr.txt'
@@ -27,5 +28,6 @@ describe 'altr'
     silent! call altr#back()
     Expect bufname('%') ==# 'autoload/altr.vim'
     Expect line('.') == last_curcor_line
+    Expect &l:buflisted to_be_true
   end
 end
