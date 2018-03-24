@@ -10,17 +10,21 @@ runtime! plugin/altr.vim
 visual
 
 describe 'altr'
-  it 'should keep the cursor line if possible'
+  before
+    %bdelete
+  end
+
+  it 'uses :buffer to keep the cursor line for a file opened before'
     silent! edit autoload/altr.vim
     normal! 50G
     let last_curcor_line = line('.')
     Expect bufname('%') ==# 'autoload/altr.vim'
     Expect last_curcor_line > 1
 
-    silent! call altr#_switch(bufname('%'), 'forward', altr#_rule_table())
+    silent! call altr#forward()
     Expect bufname('%') ==# 'doc/altr.txt'
 
-    silent! call altr#_switch(bufname('%'), 'back', altr#_rule_table())
+    silent! call altr#back()
     Expect bufname('%') ==# 'autoload/altr.vim'
     Expect line('.') == last_curcor_line
   end
