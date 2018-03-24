@@ -353,30 +353,6 @@ describe 'altr#_switch'
     silent! call altr#_switch('doc/altr.txt', 'back', altr#_rule_table())
     Expect bufname('%') ==# 'autoload/altr.vim'
   end
-
-  it 'should keep the cursor line if possible'
-    " NB: vim-vspec runs a test script in Ex mode.  In Ex mode, the cursor
-    " position is always reset to the last line of a file whenever a file is
-    " opened, even if the file is already in the buffer list and :buffer is
-    " used to open the file.  This behavior is different from the one in
-    " interactive use.
-    "
-    " TODO: Separate test scripts.  Once switching to :visual, it's not
-    " possible to go back to Ex mode for further test cases in the same
-    " script.
-    silent! visual autoload/altr.vim
-    normal! 50G
-    let last_curcor_line = line('.')
-    Expect bufname('%') ==# 'autoload/altr.vim'
-    Expect last_curcor_line > 1
-
-    silent! call altr#_switch(bufname('%'), 'forward', altr#_rule_table())
-    Expect bufname('%') ==# 'doc/altr.txt'
-
-    silent! call altr#_switch(bufname('%'), 'back', altr#_rule_table())
-    Expect bufname('%') ==# 'autoload/altr.vim'
-    Expect line('.') == last_curcor_line
-  end
 end
 
 
