@@ -30,4 +30,24 @@ describe 'altr'
     Expect line('.') == last_curcor_line
     Expect &l:buflisted to_be_true
   end
+
+  it 'uses :edit for a file :bdelete-d before'
+    silent! edit autoload/altr.vim
+    normal! 50G
+    let last_curcor_line = line('.')
+    Expect bufname('%') ==# 'autoload/altr.vim'
+    Expect last_curcor_line > 1
+    Expect &l:buflisted to_be_true
+
+    silent! call altr#forward()
+    Expect bufname('%') ==# 'doc/altr.txt'
+
+    bdelete autoload/altr.vim
+
+    silent! call altr#back()
+    Expect bufname('%') ==# 'autoload/altr.vim'
+    Expect line('.') != last_curcor_line
+    Expect line('.') == 1
+    Expect &l:buflisted to_be_true
+  end
 end
