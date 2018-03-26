@@ -116,4 +116,12 @@ describe 'Default rules'
     \   't/fixtures/asp.net/base.aspx.resx',
     \ ])
   end
+
+  it 'has rules for Python'
+    call t:.test([
+    \   't/fixtures/python/foo.py',
+    \   't/fixtures/python/test_foo.py',
+    \   't/fixtures/python/tests/test_foo.py',
+    \ ])
+  end
 end
