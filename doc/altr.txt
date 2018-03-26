@@ -1,6 +1,6 @@
 *altr.txt*	Switch to the missing file without interaction
 
-Version 0.2.1
+Version 0.3.0
 Script ID: 4202
 Copyright (C) 2011-2018 Kana Natsuno <http://whileimautomaton.net/>
 License: MIT license  {{{
