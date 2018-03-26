@@ -490,6 +490,11 @@ BUGS						*altr-bugs*
 ==============================================================================
 CHANGELOG					*altr-changelog*
 
+0.3.0	2018-03-26T19:02:59+09:00		*altr-changelog-0.3.0*
+	- Add default rules for Python.  See also |altr-default-rules|.
+	- Fix the behavior on a file which has been |:bdelete|-d.  Switching
+	  to that file with altr did not mark the file is 'buflisted'.
+
 0.2.1	2015-06-14T22:19:04+09:00		*altr-changelog-0.2.1*
 	- Revise the document a bit.  See also |altr-rule-example-4|.
 
