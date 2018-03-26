@@ -452,6 +452,12 @@ For ASP.NET: >
 	%.aspx.resx
 <
 
+For Python: >
+	%.py
+	test_%.py
+	tests/test_%.py
+<
+
 
 
 
