@@ -98,6 +98,8 @@ function! altr#define_defaults()  "{{{2
 
   call altr#define('%/%.py', '%/test_%.py', '%/tests/test_%.py')
 
+  call altr#define('%/%.go', '%/%_test.go')
+
   " FIXME: Add more useful defaults.
 endfunction
 

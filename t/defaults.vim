@@ -124,4 +124,15 @@ describe 'Default rules'
     \   't/fixtures/python/tests/test_foo.py',
     \ ])
   end
+
+  it 'has rules for Golang'
+    call t:.test([
+    \   't/fixtures/golang/foo.go',
+    \   't/fixtures/golang/foo_test.go',
+    \ ])
+    call t:.test([
+    \   't/fixtures/golang/package/foo.go',
+    \   't/fixtures/golang/package/foo_test.go',
+    \ ])
+  end
 end

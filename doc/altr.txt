@@ -458,6 +458,11 @@ For Python: >
 	tests/test_%.py
 <
 
+For Golang: >
+	%.go
+	%_test.go
+<
+
 
 
 
