@@ -100,6 +100,8 @@ function! altr#define_defaults()  "{{{2
 
   call altr#define('%/%.go', '%/%_test.go')
 
+  call altr#define('%/%.ml', '%/%.mli', '%/%.mly', '%/%.mll')
+
   " FIXME: Add more useful defaults.
 endfunction
 

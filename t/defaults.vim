@@ -135,4 +135,13 @@ describe 'Default rules'
     \   't/fixtures/golang/package/foo_test.go',
     \ ])
   end
+
+  it 'has rules for OCaml'
+    call t:.test([
+    \   't/fixtures/ocaml/foo.ml',
+    \   't/fixtures/ocaml/foo.mli',
+    \   't/fixtures/ocaml/foo.mly',
+    \   't/fixtures/ocaml/foo.mll',
+    \ ])
+  end
 end
