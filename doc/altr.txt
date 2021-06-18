@@ -458,7 +458,7 @@ For Python: >
 	tests/test_%.py
 <
 
-For Golang: >
+For Go: >
 	%.go
 	%_test.go
 <
